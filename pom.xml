@@ -4,8 +4,12 @@
 
     <groupId>org.adscale</groupId>
     <artifactId>spritnesse</artifactId>
-    <version>1.1</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <properties>
+        <spritnesse.version>1.1</spritnesse.version>
+    </properties>
 
     <modules>
         <module>spritnesse-test</module>
