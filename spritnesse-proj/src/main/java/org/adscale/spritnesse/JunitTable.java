@@ -26,29 +26,38 @@ public class JunitTable {
     }
 
 
-    public List doTable(List<List<String>> ignore) throws ClassNotFoundException {
+    public List doTable(List<List<String>> args) throws ClassNotFoundException {
         if (!new File(jarName).exists()) {
             throw new RuntimeException(errorMessage());
         }
 
-        for (List<String> strings : ignore) {
+        for (List<String> strings : args) {
             for (String string : strings) {
                 System.out.println("string = " + string);
             }
         }
-        System.out.println("ignore = " + ToStringBuilder.reflectionToString(ignore, ToStringStyle.MULTI_LINE_STYLE, true));
+        System.out.println("ignore = " + ToStringBuilder.reflectionToString(args, ToStringStyle.MULTI_LINE_STYLE, true));
 
         List classNames;
-        if (ignore == null || ignore.isEmpty()) {
+        if (args == null || args.isEmpty()) {
             classNames = new JarTestsFinder().calcMethods(jarName);
         }
         else {
-            classNames = new JarTestsFinder().calcMethods(jarName, ignore.get(0).get(0));
+            classNames = new JarTestsFinder().calcMethods(jarName, args.get(0).get(0));
         }
         List classes = listOfClasses(classNames);
         List tests = runTests(classes);
         List table = makeTable(tests);
-        return table;
+
+        for (List<String> row : args) {
+            for (int i = 0; i < row.size(); i++) {
+                String s = row.get(i);
+                row.set(i, "ignore:" + s);
+            }
+        }
+
+        args.addAll(table);
+        return args;
     }
 
 

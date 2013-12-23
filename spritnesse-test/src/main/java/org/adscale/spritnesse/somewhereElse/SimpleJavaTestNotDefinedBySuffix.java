@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Created by andrewo on 24/12/13.
+ * Copyright AdScale, GmbH, Germany (c) 2007 - 2013
  */
 public class SimpleJavaTestNotDefinedBySuffix {
 

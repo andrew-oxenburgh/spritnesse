@@ -1,20 +1,29 @@
 !define TEST_SYSTEM {slim}
 
-!path spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar:spritnesse-proj/target/spritnesse-proj-1.2.jar:junit.jar:hamcrest-all.jar:
+!path spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar:junit.jar:hamcrest-all.jar:spritnesse-proj/target/spritnesse-proj-1.2.jar:
 
 running
 
+!2 No arguments. Run all the tests to be found in the given jar
+
 |table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
 
+!2 Run all tests that end in AppVerify
 
 |table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
 |.*AppVerify                                                                                      |
 
+!2 Run all tests under package org.adscale that end in AppVerify
+
 |table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
 |org.adscale.*AppVerify                                                                           |
 
+!2 Run all tests with pattern 'org.adscale.*Another.*'
+
 |table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
 |org.adscale.*Another.*                                                                           |
+
+!2 Run all tests with pattern '.*ignored.*'
 
 |table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
 |.*ignored.*                                                                                      |
