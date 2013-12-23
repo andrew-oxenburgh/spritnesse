@@ -1,0 +1,7 @@
+!define TEST_SYSTEM {slim}
+
+!path spritnesse-test/target/spritnesse-test-1.0.jar:spritnesse-proj/target/spritnesse-proj-1.0.jar:junit.jar:hamcrest-all.jar:
+
+running
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.jar|
