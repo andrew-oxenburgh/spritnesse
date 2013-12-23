@@ -5,7 +5,7 @@
 
 	<groupId>org.adscale</groupId>
 	<artifactId>spritnesse-test</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	
 	<name>This project outputs a jar to test spritnesse against</name>
 
