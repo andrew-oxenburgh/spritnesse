@@ -3,6 +3,13 @@ Run the Demo
 
 pull the source - clone from somewhere - if you're reading this, you probably already have.
 
+git clone /Volumes
+
+move to that dir
+===
+
+cd spritnesse
+
 -- build the project.
 mvn package
 

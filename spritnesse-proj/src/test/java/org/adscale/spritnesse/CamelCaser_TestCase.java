@@ -14,7 +14,7 @@ public class CamelCaser_TestCase {
 
     @Test
     public void className_removePackage() throws Exception {
-        assertEquals("another test", camelCaser.classMassage("org.adscale.integration.AnotherTest"));
+        assertEquals("another", camelCaser.classMassage("org.adscale.integration.AnotherTest"));
     }
 
 
@@ -26,7 +26,7 @@ public class CamelCaser_TestCase {
 
     @Test
     public void className_removePackage_withNoPackage() throws Exception {
-        assertEquals("another test", camelCaser.classMassage("AnotherTest"));
+        assertEquals("another", camelCaser.classMassage("AnotherTest"));
     }
 
 
@@ -43,13 +43,13 @@ public class CamelCaser_TestCase {
 
 
     @Test
-    public void handlesUnderScores_andMultiDigitNumbers() throws Exception {
+    public void handlesMultiDigitNumbers() throws Exception {
         assertTransorm("a 12 a", "a12A");
     }
 
 
     @Test
-    public void handlesUnderScores_andSingleDigitNumbers() throws Exception {
+    public void handlesSingleDigitNumbers() throws Exception {
         assertTransorm("a 1 a", "a1A");
     }
 
@@ -87,6 +87,12 @@ public class CamelCaser_TestCase {
     @Test
     public void removePostfixTestCase() throws Exception {
         assertTransorm("a", "aTestCase");
+    }
+
+
+    @Test
+    public void removePostfixTest() throws Exception {
+        assertTransorm("a", "aTest");
     }
 
 

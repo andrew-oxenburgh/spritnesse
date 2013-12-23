@@ -9,6 +9,7 @@ public class CamelCaser {
         String ret = input;
         ret = ret.trim().replaceAll("^[Tt]est", "");
         ret = ret.trim().replaceAll("TestCase$", "");
+        ret = ret.trim().replaceAll("Test$", "");
         ret = ret.trim().replaceAll("AppVerify$", "");
         ret = ret.trim().replaceAll("TestDemo$", "");
         ret = replace(ret, "(?=[A-Z])", " ");
