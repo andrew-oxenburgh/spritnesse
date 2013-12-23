@@ -2,6 +2,8 @@ package org.adscale.spritnesse;
 
 import static util.ListUtility.list;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 
@@ -29,7 +31,20 @@ public class JunitTable {
             throw new RuntimeException(errorMessage());
         }
 
-        List classNames = new JarTestsFinder().calcMethods(jarName);
+        for (List<String> strings : ignore) {
+            for (String string : strings) {
+                System.out.println("string = " + string);
+            }
+        }
+        System.out.println("ignore = " + ToStringBuilder.reflectionToString(ignore, ToStringStyle.MULTI_LINE_STYLE, true));
+
+        List classNames;
+        if (ignore == null || ignore.isEmpty()) {
+            classNames = new JarTestsFinder().calcMethods(jarName);
+        }
+        else {
+            classNames = new JarTestsFinder().calcMethods(jarName, ignore.get(0).get(0));
+        }
         List classes = listOfClasses(classNames);
         List tests = runTests(classes);
         List table = makeTable(tests);

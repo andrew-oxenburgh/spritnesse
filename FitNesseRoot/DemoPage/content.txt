@@ -1,7 +1,32 @@
 !define TEST_SYSTEM {slim}
 
-!path spritnesse-test/target/spritnesse-test-1.1.jar:spritnesse-proj/target/spritnesse-proj-1.1.jar:junit.jar:hamcrest-all.jar:
+!path spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar:spritnesse-proj/target/spritnesse-proj-1.2.jar:junit.jar:hamcrest-all.jar:
 
 running
 
-|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.1.jar|
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|.*AppVerify                                                                                      |
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|org.adscale.*AppVerify                                                                           |
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|org.adscale.*Another.*                                                                           |
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|.*ignored.*                                                                                      |
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|.*Ignored.*                                                                                      |
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|.*Ignore.*                                                                                       |
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|Ignore                                                                                           |
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|org.adscale                                                                                      |

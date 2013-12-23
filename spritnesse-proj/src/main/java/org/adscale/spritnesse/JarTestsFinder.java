@@ -12,6 +12,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.regex.Pattern;
 
 /**
  * Copyright AdScale, GmbH, Germany (c) 2007 - 2013
@@ -20,6 +21,23 @@ public class JarTestsFinder {
 
     public List<String> calcMethods(String jarName) {
         return handleJar(jarName);
+    }
+
+
+    public List<String> calcMethods(String jarName, String filter) {
+        ArrayList<String> testNames = handleJar(jarName);
+        if (filter == null) {
+            return testNames;
+        }
+
+        Pattern pattern = Pattern.compile(filter);
+        ArrayList<String> ret = new ArrayList<String>();
+        for (String testName : testNames) {
+            if (pattern.matcher(testName).matches()) {
+                ret.add(testName);
+            }
+        }
+        return ret;
     }
 
 
@@ -57,9 +75,6 @@ public class JarTestsFinder {
 
 
     void handleClass(List<String> res, Class<?> clazz) {
-        if (ignoreTest(clazz)) {
-            return;
-        }
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
             Annotation[] annotations = method.getDeclaredAnnotations();
@@ -102,19 +117,6 @@ public class JarTestsFinder {
         substring = substring.replace("\\", ".");
         return substring;
     }
-
-
-    private boolean ignoreTest(Class<?> clazz) {
-        // default to run evert test fort now
-        if (true) {
-            return false;
-        }
-        if (!(clazz.getName().endsWith("AppVerify") || clazz.getName().endsWith("AppTest"))) {
-            return true;
-        }
-        return false;
-    }
-
 
     private String makeUrlPath(String fileName) {
         String path = new File(".").getAbsolutePath();
