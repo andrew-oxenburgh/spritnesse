@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase" time="0.016" tests="6" errors="0" skipped="0" failures="6">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
+    <property name="java.vm.version" value="20.65-b04-462"/>
+    <property name="awt.nativeDoubleBuffering" value="true"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="mrj.build" value="11M4609"/>
+    <property name="java.vm.vendor" value="Apple Inc."/>
+    <property name="java.vendor.url" value="http://www.apple.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/andrewo/development/spritnesse"/>
+    <property name="java.runtime.version" value="1.6.0_65-b14-462-11M4609"/>
+    <property name="java.awt.graphicsenv" value="apple.awt.CGraphicsEnvironment"/>
+    <property name="maven.artifact.threads" value="3"/>
+    <property name="java.endorsed.dirs" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/r0/m96r8rb51mn5209tgf3_txrr0000gp/T/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="MacRoman"/>
+    <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.8.3"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/andrewo"/>
+    <property name="user.timezone" value="Pacific/Auckland"/>
+    <property name="java.awt.printerjob" value="apple.awt.CPrinterJob"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="MacRoman"/>
+    <property name="user.name" value="andrewo"/>
+    <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.4.jar"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="apple.awt.CToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_65"/>
+    <property name="java.ext.dirs" value="/Library/Java/Extensions:/System/Library/Java/Extensions:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext"/>
+    <property name="sun.boot.class.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsfd.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar:/System/Library/Frameworks/JavaVM.framework/Frameworks/JavaRuntimeSupport.framework/Resources/Java/JavaRuntimeSupport.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/laf.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/sunrsasign.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsse.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jce.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/charsets.jar"/>
+    <property name="java.vendor" value="Apple Inc."/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="maven.home" value="/usr/share/maven"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.apple.com/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="mrj.version" value="1070.1.6.0_65-462"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase name="twoMethods_oneFail" classname="org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase" time="0.006">
+    <failure message="should include stack trace" type="java.lang.AssertionError">java.lang.AssertionError: should include stack trace
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase.twoMethods_oneFail(JunitListener_TestCase.java:60)
+</failure>
+  </testcase>
+  <testcase name="ignoredClassIgnored" classname="org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase" time="0.009">
+    <failure message="expected:&lt;ignore:org.adscale.[]junitFitnesse.enclos...&gt; but was:&lt;ignore:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<ignore:org.adscale.[]junitFitnesse.enclos...> but was:<ignore:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase.ignoredClassIgnored(JunitListener_TestCase.java:80)
+]]></failure>
+  </testcase>
+  <testcase name="oneMethod_getName" classname="org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase" time="0">
+    <failure message="expected:&lt;pass:org.adscale.[]junitFitnesse.enclos...&gt; but was:&lt;pass:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<pass:org.adscale.[]junitFitnesse.enclos...> but was:<pass:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase.oneMethod_getName(JunitListener_TestCase.java:41)
+]]></failure>
+  </testcase>
+  <testcase name="twoMethods_getNames" classname="org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase" time="0">
+    <failure message="expected:&lt;pass:org.adscale.[]junitFitnesse.enclos...&gt; but was:&lt;pass:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<pass:org.adscale.[]junitFitnesse.enclos...> but was:<pass:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase.twoMethods_getNames(JunitListener_TestCase.java:50)
+]]></failure>
+  </testcase>
+  <testcase name="ignoredMethodsIgnored" classname="org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase" time="0">
+    <failure message="expected:&lt;ignore:org.adscale.[]junitFitnesse.enclos...&gt; but was:&lt;ignore:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<ignore:org.adscale.[]junitFitnesse.enclos...> but was:<ignore:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase.ignoredMethodsIgnored(JunitListener_TestCase.java:72)
+]]></failure>
+  </testcase>
+  <testcase name="ignoredClassIgnored_showValue" classname="org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase" time="0.001">
+    <failure message="expected:&lt;ignore:org.adscale.[]junitFitnesse.enclos...&gt; but was:&lt;ignore:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<ignore:org.adscale.[]junitFitnesse.enclos...> but was:<ignore:org.adscale.[spritnesse.adscale.]junitFitnesse.enclos...>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.adscale.spritnesse.adscale.junitFitnesse.JunitListener_TestCase.ignoredClassIgnored_showValue(JunitListener_TestCase.java:88)
+]]></failure>
+  </testcase>
+</testsuite>
