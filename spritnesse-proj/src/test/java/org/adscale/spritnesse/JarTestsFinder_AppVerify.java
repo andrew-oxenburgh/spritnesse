@@ -34,6 +34,16 @@ public class JarTestsFinder_AppVerify {
 
 
     @Test
+    public void findTestWithoutName() throws Exception {
+        String expectedClassName = "NOT .*Another_AppVerify";
+
+        List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
+
+        assertEquals("should find only one test" + expectedClassName, 5, classes.size());
+    }
+
+
+    @Test
     public void findTestWithRegularExpression() throws Exception {
         String expectedClassName = "org.adscale.*";
 

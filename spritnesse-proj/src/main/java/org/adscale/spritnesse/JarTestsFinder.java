@@ -24,16 +24,32 @@ public class JarTestsFinder {
     }
 
 
-    public List<String> calcMethods(String jarName, String filter) {
+    public List<String> calcMethods(String jarName, String filterString) {
         ArrayList<String> testNames = handleJar(jarName);
-        if (filter == null) {
+        if (filterString == null) {
             return testNames;
         }
 
-        Pattern pattern = Pattern.compile(filter);
+        filterString = filterString.trim();
+
+        ArrayList<String> ret;
+        boolean startsWithNOT = filterString.toLowerCase().startsWith("not ");
+        if (startsWithNOT) {
+            ret = filter(filterString.substring(4), false, testNames);
+        }
+        else {
+            ret = filter(filterString, true, testNames);
+        }
+
+        return ret;
+    }
+
+
+    private ArrayList<String> filter(String filterString, boolean not, ArrayList<String> testNames) {
+        Pattern pattern = Pattern.compile(filterString);
         ArrayList<String> ret = new ArrayList<String>();
         for (String testName : testNames) {
-            if (pattern.matcher(testName).matches()) {
+            if (pattern.matcher(testName).matches() == not) {
                 ret.add(testName);
             }
         }
@@ -117,6 +133,7 @@ public class JarTestsFinder {
         substring = substring.replace("\\", ".");
         return substring;
     }
+
 
     private String makeUrlPath(String fileName) {
         String path = new File(".").getAbsolutePath();

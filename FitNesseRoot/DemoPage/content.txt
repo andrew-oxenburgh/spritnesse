@@ -23,6 +23,11 @@ running
 |table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
 |org.adscale.*Another.*                                                                           |
 
+!2 Run all tests WITHOUT pattern 'org.adscale.*Another.*'
+
+|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|NOT org.adscale.*Another.*                                                                       |
+
 !2 Run all tests with pattern '.*ignored.*'
 
 |table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
