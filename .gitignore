@@ -10,3 +10,16 @@
 *.jar
 *.war
 *.ear
+
+FitNesseRoot/ErrorLogs/
+FitNesseRoot/FitNesse/
+FitNesseRoot/PageFooter/
+FitNesseRoot/PageHeader/
+FitNesseRoot/FrontPage/
+FitNesseRoot/RecentChanges
+FitNesseRoot/FitNesse/
+FitNesseRoot/FitNesse/
+
+spritnesse-proj/target/
+spritnesse-test/target/classes/
+
