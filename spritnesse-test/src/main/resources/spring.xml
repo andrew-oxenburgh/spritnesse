@@ -9,4 +9,15 @@
         <constructor-arg index="0" value="hello, world"/>
     </bean>
 
+    <bean id="masterDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/adscale_test"/>
+        <property name="username" value="adscale"/>
+        <property name="password" value="adscale"/>
+        <property name="defaultAutoCommit" value="true"/>
+        <!--<property name="defaultTransactionIsolation" value="#{T(java.sql.Connection).TRANSACTION_READ_COMMITTED}"/>-->
+    </bean>
+
+
+
 </beans>
