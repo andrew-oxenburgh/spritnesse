@@ -41,7 +41,12 @@
 			<artifactId>xml-apis</artifactId>
 			<version>1.4.01</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+    </dependencies>
 	
 	<build>
 		<plugins>
@@ -55,7 +60,7 @@
                 <executions>
                     <execution>
                         <id>make-assembly</id>
-                        <phase>package</phase> 
+                        <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
