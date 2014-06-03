@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 
 import java.util.List;
@@ -39,7 +41,7 @@ public class JarTestsFinder_AppVerify {
 
         List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
 
-        assertEquals("should find only one test" + expectedClassName, 5, classes.size());
+        assertExpectedNumberOfClasses(expectedClassName, classes, 7);
     }
 
 
@@ -49,7 +51,14 @@ public class JarTestsFinder_AppVerify {
 
         List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
 
-        assertEquals("should find all tests" + expectedClassName, 6, classes.size());
+        assertExpectedNumberOfClasses(expectedClassName, classes, 8);
+    }
+
+
+    private void assertExpectedNumberOfClasses(String expectedClassName, List<String> classes, int expected) {
+        assertEquals("should find "
+                + expected
+                + " tests in " + expectedClassName + ", found " + StringUtils.join(classes, ", "), expected, classes.size());
     }
 
 }
