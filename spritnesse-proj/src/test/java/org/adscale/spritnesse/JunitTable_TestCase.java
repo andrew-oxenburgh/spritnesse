@@ -60,8 +60,8 @@ public class JunitTable_TestCase {
         List list = list("fail:class:method:exception:message:trace", "fail:class:method2:exception2:message2:trace2");
 
         List expected = list(list("report:class", "report:method",
-                "fail:<span onclick=\"alert('trace');\">exception->message</span>"), list("report:", "report:method 2",
-                "fail:<span onclick=\"alert('trace2');\">exception2->message2</span>"));
+                "fail:exception->message"), list("report:", "report:method 2",
+                "fail:exception2->message2"));
 
         assertEquals(expected, table.makeTable(list));
     }
@@ -72,7 +72,7 @@ public class JunitTable_TestCase {
         List list = list("fail:class:method:exception:message:here's an error");
 
         List expected = list(list("report:class", "report:method",
-                "fail:<span onclick=\"alert('here\\'s an error');\">exception->message</span>"));
+                "fail:exception->message"));
 
         assertEquals(expected, table.makeTable(list));
     }
@@ -83,8 +83,8 @@ public class JunitTable_TestCase {
         List list = list("fail:class:method:exception:message:trace", "fail:class:method2:exception2:message2:trace2");
 
         List expected = list(list("report:class", "report:method",
-                "fail:<span onclick=\"alert('trace');\">exception->message</span>"), list("report:", "report:method 2",
-                "fail:<span onclick=\"alert('trace2');\">exception2->message2</span>"));
+                "fail:exception->message"), list("report:", "report:method 2",
+                "fail:exception2->message2"));
 
         assertEquals(expected, table.makeTable(list));
     }

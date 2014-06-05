@@ -7,9 +7,9 @@
     </properties>
 
 
-    <groupId>org.adscale</groupId>
+    <groupId>org.adscale.spritnesse</groupId>
     <artifactId>spritnesse-proj</artifactId>
-    <version>1.3</version>
+    <version>1.5</version>
     <packaging>jar</packaging>
 
     <name>spritnesse-proj</name>

@@ -130,10 +130,8 @@ public class JunitTable {
                 String message = parts[4];
 
                 String trace = parts[5];
-                trace = trace.replaceAll("\\'", "\\\\'");
-                trace = trace.replaceAll("\n", "'+\n'");
-                String alert = " onclick=\"alert('" + trace + "');\"";
-                String text = "fail:<span" + alert + ">" + error + "->" + message + "</span>";
+                String text = "fail:" + error + "->" + message;
+                System.out.println(trace);
                 list = list(clazz, method, text);
             }
             arrayLists.add(list);
