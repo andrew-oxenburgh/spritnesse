@@ -1,4 +1,4 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,13 +27,13 @@ public class CamelCaser_TestCase {
 
     @Test
     public void className_removePackage() throws Exception {
-        assertEquals("another", camelCaser.classMassage("org.adscale.integration.AnotherTest"));
+        assertEquals("another", camelCaser.classMassage("org.oxenburgh.integration.AnotherTest"));
     }
 
 
     @Test
     public void className_removeClassSuffix() throws Exception {
-        assertEquals("another", camelCaser.classMassage("org.adscale.integration.AnotherTestDemo"));
+        assertEquals("another", camelCaser.classMassage("org.oxenburgh.integration.AnotherTestDemo"));
     }
 
 

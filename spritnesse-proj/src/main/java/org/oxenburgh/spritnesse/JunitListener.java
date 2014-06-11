@@ -1,4 +1,4 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;

@@ -1,4 +1,6 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse.enclosed;
+
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -19,18 +21,11 @@ import org.junit.Test;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-public class IgnoreMethod_AppVerify {
+public class TestWithIgnoredMethod {
 
     @Test
     @Ignore
-    public void testIgnoreMe() throws Exception {
-
+    public void testIgnored() throws Exception {
+        assertTrue(true);
     }
-
-    @Test
-    public void testNotIgnored() throws Exception {
-
-    }
-
 }

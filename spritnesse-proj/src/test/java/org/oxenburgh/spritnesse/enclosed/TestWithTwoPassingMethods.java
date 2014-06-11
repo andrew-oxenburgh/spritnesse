@@ -1,4 +1,4 @@
-package org.adscale.spritnesse.somewhereElse;
+package org.oxenburgh.spritnesse.enclosed;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,10 +20,17 @@ import org.junit.Test;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class SimpleJavaTestNotDefinedBySuffix {
+public class TestWithTwoPassingMethods {
 
     @Test
-    public void test() {
+    public void testOnePass() throws Exception {
         assertTrue(true);
     }
+
+
+    @Test
+    public void testTwoPass() throws Exception {
+        assertTrue(true);
+    }
+
 }

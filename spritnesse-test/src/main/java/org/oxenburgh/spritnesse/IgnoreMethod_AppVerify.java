@@ -1,4 +1,4 @@
-package org.adscale.spritnesse.enclosed;
+package org.oxenburgh.spritnesse;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,11 +20,16 @@ import org.junit.Test;
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@Ignore(value="some value")
-public class IgnoredClass_withValue {
+public class IgnoreMethod_AppVerify {
 
     @Test
-    public void test() throws Exception {
+    @Ignore
+    public void testIgnoreMe() throws Exception {
+
+    }
+
+    @Test
+    public void testNotIgnored() throws Exception {
 
     }
 

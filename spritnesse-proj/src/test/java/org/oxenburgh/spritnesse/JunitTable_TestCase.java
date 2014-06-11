@@ -1,4 +1,4 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 import static org.junit.Assert.assertEquals;
 import static util.ListUtility.list;

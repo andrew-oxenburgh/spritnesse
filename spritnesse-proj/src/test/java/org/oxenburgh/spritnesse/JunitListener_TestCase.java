@@ -1,13 +1,11 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.adscale.spritnesse.JunitListener;
-import org.adscale.spritnesse.enclosed.*;
+import org.oxenburgh.spritnesse.enclosed.*;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 
@@ -47,7 +45,7 @@ public class JunitListener_TestCase {
         List<String> names = runWithClass(TestWithOnePassingMethod.class);
 
         assertEquals(1, names.size());
-        assertEquals("pass:org.adscale.spritnesse.enclosed.TestWithOnePassingMethod:testPass", names.get(0));
+        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestWithOnePassingMethod:testPass", names.get(0));
     }
 
 
@@ -56,8 +54,8 @@ public class JunitListener_TestCase {
         List<String> names = runWithClass(TestWithTwoPassingMethods.class);
 
         assertEquals(2, names.size());
-        assertEquals("pass:org.adscale.spritnesse.enclosed.TestWithTwoPassingMethods:testOnePass", names.get(0));
-        assertEquals("pass:org.adscale.spritnesse.enclosed.TestWithTwoPassingMethods:testTwoPass", names.get(1));
+        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods:testOnePass", names.get(0));
+        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods:testTwoPass", names.get(1));
     }
 
 
@@ -66,9 +64,9 @@ public class JunitListener_TestCase {
         List<String> names = runWithClass(TestTwoMethodsOneFail.class);
 
         assertEquals(2, names.size());
-        String prefix = "fail:org.adscale.spritnesse.enclosed.TestTwoMethodsOneFail:testFail:java.lang.AssertionError: something more:something more:java.lang.AssertionError: something more\n";
+        String prefix = "fail:org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail:testFail:java.lang.AssertionError: something more:something more:java.lang.AssertionError: something more\n";
         assertEquals("should include stack trace", prefix.trim(), names.get(0).substring(0, prefix.length()).trim());
-        assertEquals("pass:org.adscale.spritnesse.enclosed.TestTwoMethodsOneFail:testPass", names.get(1));
+        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail:testPass", names.get(1));
     }
 
 
@@ -76,7 +74,7 @@ public class JunitListener_TestCase {
     public void ignoredMethodsIgnored() throws Exception {
         List<String> names = runWithClass(TestWithIgnoredMethod.class);
         assertEquals(1, names.size());
-        assertEquals("ignore:org.adscale.spritnesse.enclosed.TestWithIgnoredMethod:testIgnored", names.get(0));
+        assertEquals("ignore:org.oxenburgh.spritnesse.enclosed.TestWithIgnoredMethod:testIgnored", names.get(0));
     }
 
 
@@ -84,7 +82,7 @@ public class JunitListener_TestCase {
     public void ignoredClassIgnored() throws Exception {
         List<String> names = runWithClass(IgnoredClass_withoutValue.class);
         assertEquals(1, names.size());
-        assertEquals("ignore:org.adscale.spritnesse.enclosed.IgnoredClass_withoutValue:class ignored", names.get(0));
+        assertEquals("ignore:org.oxenburgh.spritnesse.enclosed.IgnoredClass_withoutValue:class ignored", names.get(0));
     }
 
 
@@ -92,7 +90,7 @@ public class JunitListener_TestCase {
     public void ignoredClassIgnored_showValue() throws Exception {
         List<String> names = runWithClass(IgnoredClass_withValue.class);
         assertEquals(1, names.size());
-        assertEquals("ignore:org.adscale.spritnesse.enclosed.IgnoredClass_withValue:some value", names.get(0));
+        assertEquals("ignore:org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue:some value", names.get(0));
     }
 
 

@@ -1,6 +1,5 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -19,12 +18,15 @@ import org.junit.Test;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-@Ignore
-public class IgnoredClass_AppVerify {
+
+public class Another_AppVerify {
 
     @Test
-    public void test() throws Exception {
+    public void hereIsALongAndComplicatedNameHowCanWeSimplifyThis() throws Exception {
+    }
 
+    @Test
+    public void hereIsALongAndComplicatedNameHowCanWeSimplifyThis_withAComma() throws Exception {
     }
 
 }

@@ -1,6 +1,6 @@
-package org.adscale.spritnesse.enclosed;
+package org.oxenburgh.spritnesse;
 
-import static org.junit.Assert.fail;
+import static junit.framework.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -20,17 +20,22 @@ import org.junit.Test;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class TestTwoMethodsOneFail {
+public class ThrowsException_AppVerify {
 
     @Test
-    public void testPass() throws Exception {
-
+    public void throwsException() throws Exception {
+        throw new RuntimeException("throw me");
     }
 
 
     @Test
-    public void testFail() throws Exception {
-        fail("something more");
+    public void failsAssertion_withMessage() throws Exception {
+        assertEquals("here's a message", true, false);
+    }
+
+    @Test
+    public void failsAssertion_withoutMessage() throws Exception {
+        assertEquals(true, false);
     }
 
 }

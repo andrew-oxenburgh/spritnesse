@@ -1,4 +1,4 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 import java.io.File;
 import java.io.IOException;

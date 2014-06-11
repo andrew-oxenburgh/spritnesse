@@ -1,6 +1,4 @@
-package org.adscale.spritnesse.enclosed;
-
-import static org.junit.Assert.assertTrue;
+package org.oxenburgh.spritnesse.enclosed;
 
 import org.junit.Test;
 
@@ -20,17 +18,11 @@ import org.junit.Test;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class TestWithTwoPassingMethods {
+public class TestWithOnePassingMethod {
 
     @Test
-    public void testOnePass() throws Exception {
-        assertTrue(true);
-    }
+    public void testPass() throws Exception {
 
-
-    @Test
-    public void testTwoPass() throws Exception {
-        assertTrue(true);
     }
 
 }

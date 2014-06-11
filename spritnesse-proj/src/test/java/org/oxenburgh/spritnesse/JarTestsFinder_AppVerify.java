@@ -1,11 +1,10 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 
 import java.util.List;
@@ -60,7 +59,7 @@ public class JarTestsFinder_AppVerify {
 
     @Test
     public void findTestWithRegularExpression() throws Exception {
-        String expectedClassName = "org.adscale.*";
+        String expectedClassName = "org.oxenburgh.*";
 
         List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
 

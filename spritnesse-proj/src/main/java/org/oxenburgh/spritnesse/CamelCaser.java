@@ -1,4 +1,4 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 /**
  This file is part of Spritnesse.

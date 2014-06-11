@@ -1,12 +1,6 @@
-package org.adscale.spritnesse;
-
-import static org.junit.Assert.assertNotNull;
+package org.oxenburgh.spritnesse;
 
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-
-import javax.annotation.Resource;
 
 /**
  This file is part of Spritnesse.
@@ -24,15 +18,11 @@ import javax.annotation.Resource;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-@ContextConfiguration("classpath:/spring.xml")
-public class SpringBean_AppVerify extends AbstractJUnit4SpringContextTests {
-
-    @Resource(name = "thingy")
-    String thingy;
-
+public class Some_AppVerify {
 
     @Test
-    public void demo() {
-        assertNotNull(thingy);
+    public void testHere() throws Exception {
+
     }
+
 }

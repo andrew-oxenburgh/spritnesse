@@ -1,7 +1,9 @@
-package org.adscale.spritnesse.enclosed;
+package org.oxenburgh.spritnesse.enclosed;
 
-import org.junit.Ignore;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
+
 /**
  This file is part of Spritnesse.
 
@@ -18,13 +20,17 @@ import org.junit.Test;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-@Ignore
-public class IgnoredClass_withoutValue {
+public class TestTwoMethodsOneFail {
 
     @Test
-    public void test() throws Exception {
+    public void testPass() throws Exception {
 
+    }
+
+
+    @Test
+    public void testFail() throws Exception {
+        fail("something more");
     }
 
 }

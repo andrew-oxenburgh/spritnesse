@@ -1,6 +1,6 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse.somewhereElse;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -20,22 +20,10 @@ import org.junit.Test;
  You should have received a copy of the GNU General Public License
  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ThrowsException_AppVerify {
+public class SimpleJavaTestNotDefinedBySuffix {
 
     @Test
-    public void throwsException() throws Exception {
-        throw new RuntimeException("throw me");
+    public void test() {
+        assertTrue(true);
     }
-
-
-    @Test
-    public void failsAssertion_withMessage() throws Exception {
-        assertEquals("here's a message", true, false);
-    }
-
-    @Test
-    public void failsAssertion_withoutMessage() throws Exception {
-        assertEquals(true, false);
-    }
-
 }

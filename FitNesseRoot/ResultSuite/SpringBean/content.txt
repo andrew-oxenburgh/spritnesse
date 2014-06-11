@@ -8,5 +8,5 @@ running
 
 !2 No arguments. Run all the tests to be found in the given jar
 
-|table:org.adscale.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
+|table:org.oxenburgh.spritnesse.JunitTable|spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar|
 |.*Spring.*                                                                                     |

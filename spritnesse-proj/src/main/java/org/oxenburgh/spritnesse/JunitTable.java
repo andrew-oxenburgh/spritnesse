@@ -1,9 +1,7 @@
-package org.adscale.spritnesse;
+package org.oxenburgh.spritnesse;
 
 import static util.ListUtility.list;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 
@@ -134,10 +132,7 @@ public class JunitTable {
             }
             else {
                 String message = parts[4];
-
-                String trace = parts[5];
                 String text = "fail:" + error + "->" + message;
-                System.out.println(trace);
                 list = list(clazz, method, text);
             }
             arrayLists.add(list);
