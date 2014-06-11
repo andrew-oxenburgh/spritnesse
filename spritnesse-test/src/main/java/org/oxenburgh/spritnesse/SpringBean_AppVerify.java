@@ -22,7 +22,10 @@ import javax.annotation.Resource;
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ along with Spritnesse.  If not, see <http://www.gnu.org/licenses/>.
+
+ Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
+
  */
 @ContextConfiguration("classpath:/spring.xml")
 public class SpringBean_AppVerify extends AbstractJUnit4SpringContextTests {
