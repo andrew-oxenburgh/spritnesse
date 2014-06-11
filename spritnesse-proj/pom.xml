@@ -1,5 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--
+    This file is part of Spritnesse.
+
+    Spritnesse is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Spritnesse is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    -->
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
@@ -22,9 +38,9 @@
             <version>4.11</version>
         </dependency>
         <dependency>
-            <groupId>fitnesse</groupId>
+            <groupId>org.fitnesse</groupId>
             <artifactId>fitnesse</artifactId>
-            <version>20131108</version>
+            <version>20140418</version>
         </dependency>
     </dependencies>
     <build>

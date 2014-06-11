@@ -12,7 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Copyright AdScale, GmbH, Germany (c) 2007 - 2013
+ This file is part of Spritnesse.
+
+ Spritnesse is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ Spritnesse is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class JunitTable {
 
@@ -30,13 +43,6 @@ public class JunitTable {
         if (!new File(jarName).exists()) {
             throw new RuntimeException(errorMessage());
         }
-
-        for (List<String> strings : args) {
-            for (String string : strings) {
-                System.out.println("string = " + string);
-            }
-        }
-        System.out.println("ignore = " + ToStringBuilder.reflectionToString(args, ToStringStyle.MULTI_LINE_STYLE, true));
 
         List classNames;
         if (args == null || args.isEmpty()) {

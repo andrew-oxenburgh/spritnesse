@@ -7,13 +7,27 @@ import org.adscale.spritnesse.JunitListener;
 import org.adscale.spritnesse.enclosed.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 
 import java.util.List;
 
 /**
- * Copyright AdScale, GmbH, Germany (c) 2007 - 2013
+ * This file is part of Spritnesse.
+ * <p/>
+ * Spritnesse is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * <p/>
+ * Spritnesse is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p/>
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class JunitListener_TestCase {
 
@@ -52,10 +66,8 @@ public class JunitListener_TestCase {
         List<String> names = runWithClass(TestTwoMethodsOneFail.class);
 
         assertEquals(2, names.size());
-        assertTrue("should include stack trace",
-                names.get(0).startsWith(
-                        "fail:org.adscale.spritnesse.enclosed.TestTwoMethodsOneFail:testFail:java.lang.AssertionError: something more:something more:java.lang.AssertionError: something more\n"
-                                + "\tat org.junit.Assert.fail(Assert.java:88)"));
+        String prefix = "fail:org.adscale.spritnesse.enclosed.TestTwoMethodsOneFail:testFail:java.lang.AssertionError: something more:something more:java.lang.AssertionError: something more\n";
+        assertEquals("should include stack trace", prefix.trim(), names.get(0).substring(0, prefix.length()).trim());
         assertEquals("pass:org.adscale.spritnesse.enclosed.TestTwoMethodsOneFail:testPass", names.get(1));
     }
 
