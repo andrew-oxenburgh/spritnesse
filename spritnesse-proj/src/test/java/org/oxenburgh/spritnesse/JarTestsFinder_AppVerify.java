@@ -56,7 +56,7 @@ public class JarTestsFinder_AppVerify {
 
         List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
 
-        assertExpectedNumberOfClasses(expectedClassName, classes, 7);
+        assertExpectedNumberOfClasses(expectedClassName, classes, 6);
     }
 
 
@@ -66,7 +66,7 @@ public class JarTestsFinder_AppVerify {
 
         List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
 
-        assertExpectedNumberOfClasses(expectedClassName, classes, 8);
+        assertExpectedNumberOfClasses(expectedClassName, classes, 7);
     }
 
 

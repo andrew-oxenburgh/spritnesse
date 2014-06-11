@@ -1,11 +1,13 @@
 package org.oxenburgh.spritnesse;
 
+import static java.lang.reflect.Modifier.isAbstract;
 import static util.ListUtility.list;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 
 import java.io.File;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +82,10 @@ public class JunitTable {
                 continue;
             }
             Class<?> aClass = this.getClass().getClassLoader().loadClass(clazz);
-            classes.add(aClass);
+            boolean isNotAbstract = !isAbstract(aClass.getModifiers());
+            if (isNotAbstract) {
+                classes.add(aClass);
+            }
         }
         return classes;
     }
