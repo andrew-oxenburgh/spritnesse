@@ -1,4 +1,4 @@
-package org.oxenburgh.spritnesse.enclosed;
+package org.oxenburgh.spritnesse.abstractClassTest;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,20 +20,17 @@ import org.junit.Test;
  You should have received a copy of the GNU Lesser General Public
  License along with this library.
 
- Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
-
+  <p/>
+  Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class TestWithTwoPassingMethods {
+public abstract class SuperClass {
 
     @Test
-    public void testOnePass() throws Exception {
+    public void superTest() {
+        abstractMethod();
         assertTrue(true);
     }
 
 
-    @Test
-    public void testTwoPass() throws Exception {
-        assertTrue(true);
-    }
-
+    abstract void abstractMethod();
 }
