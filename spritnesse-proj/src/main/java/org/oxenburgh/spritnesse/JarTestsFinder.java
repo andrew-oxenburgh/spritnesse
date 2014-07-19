@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
+
+import static java.lang.reflect.Modifier.isAbstract;
 
 /**
  This file is part of Spritnesse.
@@ -96,7 +99,9 @@ public class JarTestsFinder {
             String clazzName = massageToClassPath(clazzPath);
             try {
                 Class<?> clazz = loadClass(loader, clazzName);
-                handleClass(res, clazz);
+//                if (!isAbstract(clazz.getModifiers())) {
+                    handleClass(res, clazz);
+//                }
             }
             catch (NoClassDefFoundError e) {
                 // add it anyway. let junit show error

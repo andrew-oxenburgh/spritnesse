@@ -1,36 +1,43 @@
 package org.oxenburgh.spritnesse;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import org.apache.commons.lang.StringUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
- This file is part of Spritnesse.
-
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 3.0 of the License, or (at your option) any later version.
-
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
-
- You should have received a copy of the GNU Lesser General Public
- License along with this library.
-
- Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
-
+ * This file is part of Spritnesse.
+ * <p/>
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ * <p/>
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * <p/>
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ * <p/>
+ * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class JarTestsFinder_AppVerify {
+public class JarTestsFinder_TestCase {
 
     public static final String TEST_JAR = "./spritnesse-test/target/spritnesse-test-1.0.0-SNAPSHOT.jar";
+    public final static int NUMBER_OF_GOOD_CLASSES = 8;
+
+
+    @BeforeClass
+    public static void before() {
+        assertTrue("can't find file in " + new File(".").getAbsolutePath(), new File(TEST_JAR).exists());
+    }
 
 
     @Test(expected = RuntimeException.class)
@@ -56,7 +63,7 @@ public class JarTestsFinder_AppVerify {
 
         List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
 
-        assertExpectedNumberOfClasses(expectedClassName, classes, 6);
+        assertExpectedNumberOfClasses(expectedClassName, classes, NUMBER_OF_GOOD_CLASSES - 1);
     }
 
 
@@ -66,7 +73,7 @@ public class JarTestsFinder_AppVerify {
 
         List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
 
-        assertExpectedNumberOfClasses(expectedClassName, classes, 7);
+        assertExpectedNumberOfClasses(expectedClassName, classes, NUMBER_OF_GOOD_CLASSES);
     }
 
 

@@ -55,6 +55,7 @@ License along with this library.
                     <excludes>
                         <exclude>**/enclosed/**.java</exclude>
                     </excludes>
+                    <workingDirectory>..</workingDirectory>
                 </configuration>
             </plugin>
             <plugin>
