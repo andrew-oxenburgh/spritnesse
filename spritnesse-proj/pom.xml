@@ -28,7 +28,7 @@ License along with this library.
 
     <groupId>org.oxenburgh</groupId>
     <artifactId>spritnesse-proj</artifactId>
-    <version>1.7</version>
+    <version>1.8</version>
     <packaging>jar</packaging>
 
     <name>spritnesse-proj</name>
