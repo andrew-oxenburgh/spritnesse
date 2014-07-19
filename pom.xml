@@ -4,11 +4,12 @@
 
     <groupId>org.oxenburgh</groupId>
     <artifactId>spritnesse</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>pom</packaging>
+    <name>test-junit-jar-creator</name>
 
     <modules>
-        <module>spritnesse-test</module>
+        <module>test-junit-jar-creator</module>
         <module>spritnesse-proj</module>
     </modules>
 

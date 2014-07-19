@@ -19,19 +19,18 @@ License along with this library.
     Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
 
     -->
+
+    <groupId>org.oxenburgh</groupId>
+    <artifactId>spritnesse-proj</artifactId>
+    <version>1.8</version>
+    <packaging>jar</packaging>
+    <name>spritnesse-proj</name>
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-    <groupId>org.oxenburgh</groupId>
-    <artifactId>spritnesse-proj</artifactId>
-    <version>1.8</version>
-    <packaging>jar</packaging>
-
-    <name>spritnesse-proj</name>
 
     <dependencies>
         <dependency>
