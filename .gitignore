@@ -11,6 +11,8 @@
 *.war
 *.ear
 
+*.zip
+
 FitNesseRoot/ErrorLogs/
 FitNesseRoot/FitNesse/
 FitNesseRoot/PageFooter/

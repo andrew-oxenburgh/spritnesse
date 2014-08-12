@@ -4,15 +4,25 @@ Spritnesse 1.0
 JUnit under Fitnesse
 
 
+Mission
+----
+### JUnit under Fitnesse ###
+
+Lets see some tests that were written in JUnit, running under fitnesse, see their names and their success status, and also, make their names easy to read!
+
+These tests could be integration test, or straight unit tests.
+
 Why
 ===
 
-Fitnesse is a great way to write integration tests, but it misses out in a couple of places where Spritnesse is trying to change.
+Fitnesse is a great way to write business oriented tests.
 
-1. It depends on a syntax which can be awkward to learn use, especially on large projects, and for testers.
+However there are tests we've written that also fill these needs, and may be shown just for documentation. I am talking here, of course, about JUnit tests.
 
-2. It is often used for Acceptance tests, which may be able to re-use tests from the unit suite, but need to be re-written for use in the Acceptance suite.
+In a typical TDD environment we have hundreds or thousands of these tests, and some of them fill a specific business need. Whether it's edge case validation, or some complex pricing model, we can view these tests and run them from within Fitnesse.
 
-Spritnesse allows a dev/tester to write tests in JUnit, then run them in Fitnesse and see the results as a table in fitnesse.
+We should be able to see the names of the tests, and perhaps do some rough wikification on the camel cased names.
 
-The results are manipulated in a 'user friendly' way.
+Either way, Spritnesse is here.
+
+<b>JUnit under Fitnesse </b> tomorrows future, today
