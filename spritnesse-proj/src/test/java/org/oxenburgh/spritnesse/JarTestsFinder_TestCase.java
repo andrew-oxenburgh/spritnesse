@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class JarTestsFinder_TestCase {
 
-    public static final String TEST_JAR = "./test-junit-jar-creator/target/test-junit-jar-creator-1.0.0-SNAPSHOT.jar";
+    public static final String TEST_JAR = "./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar";
     public final static int NUMBER_OF_GOOD_CLASSES = 6;
 
 
