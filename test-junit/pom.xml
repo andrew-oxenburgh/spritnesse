@@ -35,7 +35,7 @@ License along with this library.
     <parent>
         <groupId>org.oxenburgh</groupId>
         <artifactId>spritnesse</artifactId>
-        <version>1.9</version>
+        <version>1.9.1</version>
     </parent>
 
     <dependencies>

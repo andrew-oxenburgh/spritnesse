@@ -58,7 +58,7 @@ public class JunitTable {
 
     private List intDoTable(List<List<String>> args) throws ClassNotFoundException {
         if (!new File(jarName).exists()) {
-            throw new RuntimeException(errorMessage());
+            return list(list("no such jar found [" + jarName + "]"));
         }
 
         List classNames;
@@ -67,12 +67,9 @@ public class JunitTable {
         } else {
             classNames = new JarTestsFinder().calcMethods(jarName, args.get(0).get(0));
         }
+
         List classes = listOfClasses(classNames);
-
-        logger.info("found the following classes " + Utils.toString(classes));
-
         List tests = runTests(classes);
-        logger.info("found the following tests " + Utils.toString(classes));
         List table = makeTable(tests);
 
         for (List<String> row : args) {
