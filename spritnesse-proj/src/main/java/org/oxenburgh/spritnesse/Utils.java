@@ -1,12 +1,8 @@
 package org.oxenburgh.spritnesse;
 
+import java.net.URLClassLoader;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
-/**
- * Created by andrew on 30/08/14.
- */
 public class Utils {
     public static String toString(Collection setOfTests) {
         String errorSet = "[\n";
@@ -18,5 +14,11 @@ public class Utils {
         return errorSet;
     }
 
-
+    public static Class<?> loadClass(URLClassLoader loader, String clazzName) {
+        try {
+            return loader.loadClass(clazzName);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("can't find '" + clazzName + "' in loader '" + loader + "'", e);
+        }
+    }
 }

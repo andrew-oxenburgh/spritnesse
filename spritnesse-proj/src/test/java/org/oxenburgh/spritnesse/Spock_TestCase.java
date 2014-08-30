@@ -23,6 +23,15 @@ public class Spock_TestCase {
         assertTrue("can't find file " + TEST_JAR + " in " + new File(".").getAbsolutePath(), new File(TEST_JAR).exists());
     }
 
+    @Test
+    public void spockTable_expectToHaveSpockAvailable() throws Exception {
+        new SpockTable("") {
+            @Override
+            boolean checkSpockAvailable() {
+                return false;
+            }
+        };
+    }
 
     @Test(expected = RuntimeException.class)
     public void noJarFile() throws Exception {

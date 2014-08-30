@@ -19,6 +19,7 @@ import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 
 import static java.lang.reflect.Modifier.isAbstract;
+import static org.oxenburgh.spritnesse.Utils.loadClass;
 
 /**
  * This file is part of Spritnesse.
@@ -136,15 +137,6 @@ public class JarTestsFinder {
             logger.info("no class found", e);
         }
         return ret;
-    }
-
-
-    Class<?> loadClass(URLClassLoader loader, String clazzName) {
-        try {
-            return loader.loadClass(clazzName);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("can't find '" + clazzName + "' in loader '" + loader + "'", e);
-        }
     }
 
 
