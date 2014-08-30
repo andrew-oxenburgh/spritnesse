@@ -32,6 +32,12 @@ License along with this library.
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <parent>
+        <groupId>org.oxenburgh</groupId>
+        <artifactId>spritnesse</artifactId>
+        <version>1.8</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -79,7 +85,12 @@ License along with this library.
             <artifactId>spring-jdbc</artifactId>
             <version>3.2.0.RELEASE</version>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+</dependencies>
 
     <build>
         <plugins>

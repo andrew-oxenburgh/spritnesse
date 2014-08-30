@@ -32,15 +32,15 @@ public class JunitListener extends RunListener {
 
     private List<String> testNames = new ArrayList<String>();
 
-    String key;
+    String currentKey;
 
     boolean failed;
 
 
     @Override
     public void testStarted(Description description) throws Exception {
-        key = createKey(description);
-        testNames.add(key);
+        currentKey = createKey(description);
+        testNames.add(currentKey);
         failed = false;
     }
 
@@ -55,16 +55,16 @@ public class JunitListener extends RunListener {
 
     @Override
     public void testFailure(Failure failure) throws Exception {
-        testNames.remove(key);
+        testNames.remove(currentKey);
         failed = true;
 
-        testNames.add("fail" + ":" + key + ":" + failure.getException() + ":" + failure.getMessage() + ":" + failure.getTrace());
+        testNames.add("fail" + ":" + currentKey + ":" + failure.getException() + ":" + failure.getMessage() + ":" + failure.getTrace());
     }
 
 
     private void prependCurrentTest(String prepend) {
-        testNames.remove(key);
-        testNames.add(prepend + ":" + key);
+        testNames.remove(currentKey);
+        testNames.add(prepend + ":" + currentKey);
     }
 
 

@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 public class JarTestsFinder_TestCase {
 
     public static final String TEST_JAR = "./test-junit-jar-creator/target/test-junit-jar-creator-1.0.0-SNAPSHOT.jar";
-    public final static int NUMBER_OF_GOOD_CLASSES = 8;
+    public final static int NUMBER_OF_GOOD_CLASSES = 6;
 
 
     @BeforeClass
@@ -54,16 +54,6 @@ public class JarTestsFinder_TestCase {
 
         assertExpectedNumberOfClasses(expectedClassName, classes, 1);
         assertEquals("should be right name of '" + expectedClassName + "'", true, classes.get(0).endsWith(".Another_AppVerify"));
-    }
-
-
-    @Test
-    public void findTestWithoutName() throws Exception {
-        String expectedClassName = "NOT .*Another_AppVerify";
-
-        List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
-
-        assertExpectedNumberOfClasses(expectedClassName, classes, NUMBER_OF_GOOD_CLASSES - 1);
     }
 
 

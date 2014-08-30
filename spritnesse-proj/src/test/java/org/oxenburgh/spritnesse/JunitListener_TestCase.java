@@ -1,34 +1,34 @@
 package org.oxenburgh.spritnesse;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.oxenburgh.spritnesse.enclosed.*;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
+import org.oxenburgh.HelloSpockTest;
+import org.oxenburgh.spritnesse.enclosed.*;
 
+import java.util.HashSet;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
- This file is part of Spritnesse.
-
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 3.0 of the License, or (at your option) any later version.
-
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
-
- You should have received a copy of the GNU Lesser General Public
- License along with this library.
-
- Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
-
+ * This file is part of Spritnesse.
+ * <p/>
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ * <p/>
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * <p/>
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ * <p/>
+ * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
 public class JunitListener_TestCase {
 
@@ -40,6 +40,27 @@ public class JunitListener_TestCase {
     @Before
     public void before() throws Exception {
         core.addListener(listener);
+    }
+
+
+    @Test
+    public void oneMethod_spock() throws Exception {
+        List<String> names = runWithClass(HelloSpockTest.class);
+        assertEquals(6, names.size());
+        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:length of Spock's and his friends' names");
+        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:demo method error");
+        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:addition");
+        assertFoundLine(names, "pass:org.oxenburgh.HelloSpockTest:demo method 3");
+        assertFoundLine(names, "pass:org.oxenburgh.HelloSpockTest:demo method 2");
+        assertFoundLine(names, "pass:org.oxenburgh.HelloSpockTest:demo method 1");
+    }
+
+    private void assertFoundLine(List<String> actualSet, String expected) {
+        HashSet<String> setOfTests = new HashSet(actualSet);
+        if (!setOfTests.contains(expected)) {
+            String errorSet = Utils.toString(setOfTests);
+            assertTrue(errorSet + " doesn't contain \n" + expected, setOfTests.contains(expected));
+        }
     }
 
 

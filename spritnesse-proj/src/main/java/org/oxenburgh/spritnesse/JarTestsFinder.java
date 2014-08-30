@@ -1,10 +1,13 @@
 package org.oxenburgh.spritnesse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import spock.lang.Specification;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -18,25 +21,26 @@ import java.util.regex.Pattern;
 import static java.lang.reflect.Modifier.isAbstract;
 
 /**
- This file is part of Spritnesse.
-
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 3.0 of the License, or (at your option) any later version.
-
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
-
- You should have received a copy of the GNU Lesser General Public
- License along with this library.
-
- Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
-
+ * This file is part of Spritnesse.
+ * <p/>
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ * <p/>
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * <p/>
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ * <p/>
+ * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
 public class JarTestsFinder {
+
+    static Logger logger = LoggerFactory.getLogger(JarTestsFinder.class);
 
     public List<String> calcMethods(String jarName) {
         return handleJar(jarName);
@@ -51,24 +55,15 @@ public class JarTestsFinder {
 
         filterString = filterString.trim();
 
-        ArrayList<String> ret;
-        boolean startsWithNOT = filterString.toLowerCase().startsWith("not ");
-        if (startsWithNOT) {
-            ret = filter(filterString.substring(4), false, testNames);
-        }
-        else {
-            ret = filter(filterString, true, testNames);
-        }
-
-        return ret;
+        return filter(filterString, testNames);
     }
 
 
-    private ArrayList<String> filter(String filterString, boolean not, ArrayList<String> testNames) {
-        Pattern pattern = Pattern.compile(filterString);
+    private ArrayList<String> filter(String filterString, ArrayList<String> testNames) {
+        Pattern pattern = Pattern.compile(filterString + ".*");
         ArrayList<String> ret = new ArrayList<String>();
         for (String testName : testNames) {
-            if (pattern.matcher(testName).matches() == not) {
+            if (pattern.matcher(testName).matches()) {
                 ret.add(testName);
             }
         }
@@ -85,8 +80,7 @@ public class JarTestsFinder {
                 JarEntry jarEntry = entries.nextElement();
                 handleEntry(tests, loader, jarEntry);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("can't find file '" + jarName + "', root from '" + new File(".").getAbsolutePath() + "'", e);
         }
         return tests;
@@ -98,38 +92,57 @@ public class JarTestsFinder {
         if (clazzPath.endsWith(".class")) {
             String clazzName = massageToClassPath(clazzPath);
             try {
-                Class<?> clazz = loadClass(loader, clazzName);
-//                if (!isAbstract(clazz.getModifiers())) {
+                Class clazz = loadClass(loader, clazzName);
+                if (!isAbstract(clazz.getModifiers())) {
                     handleClass(res, clazz);
-//                }
-            }
-            catch (NoClassDefFoundError e) {
+                }
+            } catch (NoClassDefFoundError e) {
                 // add it anyway. let junit show error
+                logger.info("can't find class - ", e);
                 res.add(clazzName);
             }
         }
     }
 
-
     void handleClass(List<String> res, Class<?> clazz) {
-        Method[] methods = clazz.getMethods();
-        for (Method method : methods) {
-            Annotation[] annotations = method.getDeclaredAnnotations();
-            for (Annotation annotation : annotations) {
-                if (annotation.annotationType().getName().endsWith(".Test")) {
-                    res.add(clazz.getName());
-                    return;
+        boolean isSpec = isSpec(clazz);
+        if (isSpec) {
+            res.add(clazz.getName());
+            logger.info("adding spec class {}", clazz.getName());
+            return;
+        } else {
+            Method[] methods = clazz.getMethods();
+            for (Method method : methods) {
+                Annotation[] annotations = method.getDeclaredAnnotations();
+                for (Annotation annotation : annotations) {
+                    String annotationName = annotation.annotationType().getName();
+                    if (annotationName.endsWith(".Test")) {
+                        res.add(clazz.getName());
+                        logger.info("adding test class {}", clazz.getName());
+                        return;
+                    }
                 }
             }
         }
+    }
+
+    private boolean isSpec(Class<?> clazz) {
+        boolean ret = false;
+        try {
+            ret = Specification.class.isAssignableFrom(clazz);
+        } catch (RuntimeException e) {
+            logger.info("", e);
+        } catch (NoClassDefFoundError e) {
+            logger.info("no class found", e);
+        }
+        return ret;
     }
 
 
     Class<?> loadClass(URLClassLoader loader, String clazzName) {
         try {
             return loader.loadClass(clazzName);
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException("can't find '" + clazzName + "' in loader '" + loader + "'", e);
         }
     }
@@ -140,11 +153,10 @@ public class JarTestsFinder {
         URL url = null;
         try {
             url = new URL(urlPath);
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        return URLClassLoader.newInstance(new URL[] { url });
+        return URLClassLoader.newInstance(new URL[]{url});
     }
 
 

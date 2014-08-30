@@ -1,36 +1,39 @@
 package org.oxenburgh.spritnesse;
 
-import static java.lang.reflect.Modifier.isAbstract;
-import static util.ListUtility.list;
-
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.reflect.Modifier.isAbstract;
+import static util.ListUtility.list;
+
 /**
- This file is part of Spritnesse.
-
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 3.0 of the License, or (at your option) any later version.
-
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
-
- You should have received a copy of the GNU Lesser General Public
- License along with this library.
-
- Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
-
+ * This file is part of Spritnesse.
+ * <p/>
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ * <p/>
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * <p/>
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ * <p/>
+ * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
 public class JunitTable {
+
+    static Logger logger = LoggerFactory.getLogger(JunitTable.class);
+
 
     private final CamelCaser camelCaser = new CamelCaser();
 
@@ -43,6 +46,17 @@ public class JunitTable {
 
 
     public List doTable(List<List<String>> args) throws ClassNotFoundException {
+        logger.info("inside doTable");
+        List ret = null;
+        try {
+            ret = intDoTable(args);
+        }catch(RuntimeException e){
+            logger.error("", e);
+        }
+        return ret;
+    }
+
+    private List intDoTable(List<List<String>> args) throws ClassNotFoundException {
         if (!new File(jarName).exists()) {
             throw new RuntimeException(errorMessage());
         }
@@ -50,12 +64,15 @@ public class JunitTable {
         List classNames;
         if (args == null || args.isEmpty()) {
             classNames = new JarTestsFinder().calcMethods(jarName);
-        }
-        else {
+        } else {
             classNames = new JarTestsFinder().calcMethods(jarName, args.get(0).get(0));
         }
         List classes = listOfClasses(classNames);
+
+        logger.info("found the following classes " + Utils.toString(classes));
+
         List tests = runTests(classes);
+        logger.info("found the following tests " + Utils.toString(classes));
         List table = makeTable(tests);
 
         for (List<String> row : args) {
@@ -123,8 +140,7 @@ public class JunitTable {
             String clazzName = parts[1];
             if (currentClass.equals(clazzName)) {
                 clazzName = "";
-            }
-            else {
+            } else {
                 currentClass = clazzName;
             }
             String methodName = parts.length > 2 ? parts[2] : "";
@@ -137,8 +153,7 @@ public class JunitTable {
 
             if (error == null) {
                 list = list(clazz, method, status);
-            }
-            else {
+            } else {
                 String message = parts[4];
                 String text = "fail:" + error + "->" + message;
                 list = list(clazz, method, text);

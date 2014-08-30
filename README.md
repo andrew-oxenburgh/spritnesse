@@ -26,3 +26,13 @@ We should be able to see the names of the tests, and perhaps do some rough wikif
 Either way, Spritnesse is here.
 
 <b>JUnit under Fitnesse </b> tomorrows future, today
+
+Release Notes
+=============
+
+1.9
+ - Now handles Spock tests
+
+1.8
+ - Runs with JUnit
+ - Licence (Lesser GPL)
