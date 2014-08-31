@@ -1,0 +1,45 @@
+!define TEST_SYSTEM {slim}
+!path ./spritnesse-proj/target/spritnesse-proj-1.9.1.jar
+!path ./test-junit/target/test-junit-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+!path ./test-spock/target/test-spock-1.0-jar-with-dependencies.jar
+!path ./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+!path ./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT.jar
+!path ./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT-tests.jar
+
+|import                  |
+|org.oxenburgh.spritnesse|
+
+!1 To make this work
+
+You need to include the jar you want to test in both the !path statement, and as an argument to the table.
+
+This is because of the way Fitnesse (and java) handles the class path. To get a list of tests, we need to specify a jar. To run those tests, that jar will need to be in the class path
+
+There are alternatives to this, but this worked for me.
+
+For spock and other environments, you'll need to make that environment available to fitnesse. I found a good way was to package the env up in the jar. You can look in the pom.xml for test-spock
+as an example.
+
+!2 Logging
+You'll find the log file in the root dir, called spritnesse.log. If you want to override this, place a logback.* file in the classpath ahead of the spritnesse-proj jar.
+
+!2 No arguments. Run all the tests to be found in the given jar
+!|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
+
+!2 unknown jar
+!|Table:JunitTable|non-existent.jar|
+|org.oxen.*                        |
+
+!2 Argument - filters on package, regexp and wildcard
+!|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
+|org.oxen.*                                                         |
+
+!2 Will run spock tests
+
+!|Table:SpockTable|./test-spock/target/test-spock-1.0.jar|
+|org.oxenburgh                                           |
+
+!2 Will run cucumber tests
+
+!|Table:CucumberTable|./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT-tests.jar|
+|.*Belly.*                                                                         |

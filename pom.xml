@@ -11,6 +11,7 @@
     <modules>
         <module>test-junit</module>
         <module>test-spock</module>
+        <module>test-cucumber</module>
         <module>spritnesse-proj</module>
     </modules>
 

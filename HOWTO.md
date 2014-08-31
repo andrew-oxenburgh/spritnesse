@@ -15,7 +15,7 @@ mvn package
 
 
 -- run fitnesse
-java -jar fitnesse.jar -p 9002
+java -jar lib/fitnesse-standalone.jar -p 9002
 
 
 -- go to the demo page
