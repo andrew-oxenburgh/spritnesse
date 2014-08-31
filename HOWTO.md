@@ -15,11 +15,11 @@ mvn package
 
 
 -- run fitnesse
-java -jar lib/fitnesse-standalone.jar -p 9002
+./run.sh
 
 
 -- go to the demo page
-open http://localhost:9002/DemoPage
+open http://localhost:9001
 
 
 
@@ -27,5 +27,3 @@ Debug
 =====
 
 Remote Port:8000
-
-Listen
