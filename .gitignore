@@ -7,9 +7,9 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
-*.war
-*.ear
+target/*.jar
+target/*.war
+target/*.ear
 
 *.zip
 
