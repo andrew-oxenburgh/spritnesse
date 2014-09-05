@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Spock_TestCase {
 
-    static Logger logger = LoggerFactory.getLogger("chapters.introduction.HelloWorld1");
+    static Logger logger = LoggerFactory.getLogger(Spock_TestCase.class);
 
     public static final String TEST_JAR = "./test-spock/target/test-spock-1.0-jar-with-dependencies.jar";
 
@@ -35,13 +35,13 @@ public class Spock_TestCase {
 
     @Test(expected = RuntimeException.class)
     public void noJarFile() throws Exception {
-        new JarTestsFinder().calcMethods("NON-EXISTENT.jar");
+        new JarTestsFinder().findClassesIn("NON-EXISTENT.jar");
     }
 
 
     @Test
     public void findTestWithName() throws Exception {
-        List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, "org.oxenburgh.*");
+        List<String> classes = new JarTestsFinder().findClassesInLike(TEST_JAR, "org.oxenburgh.*");
         System.out.println("classes = " + classes);
     }
 }

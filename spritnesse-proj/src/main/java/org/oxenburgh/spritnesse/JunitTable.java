@@ -63,9 +63,9 @@ public class JunitTable {
 
         List classNames;
         if (args == null || args.isEmpty()) {
-            classNames = new JarTestsFinder().calcMethods(jarName);
+            classNames = new JarTestsFinder().findClassesIn(jarName);
         } else {
-            classNames = new JarTestsFinder().calcMethods(jarName, args.get(0).get(0));
+            classNames = new JarTestsFinder().findClassesInLike(jarName, args.get(0).get(0));
         }
 
         List classes = listOfClasses(classNames);

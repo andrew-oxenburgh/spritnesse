@@ -43,27 +43,27 @@ public class JarTestsFinder {
 
     static Logger logger = LoggerFactory.getLogger(JarTestsFinder.class);
 
-    public List<String> calcMethods(String jarName) {
-        return handleJar(jarName);
+    public List<String> findClassesIn(String jarName) {
+        return findTestClassesInJar(jarName);
     }
 
 
-    public List<String> calcMethods(String jarName, String filterString) {
-        ArrayList<String> testNames = handleJar(jarName);
-        if (filterString == null) {
+    public List<String> findClassesInLike(String jarPath, String filter) {
+        List<String> testNames = findTestClassesInJar(jarPath);
+        if (filter == null) {
             return testNames;
         }
 
-        filterString = filterString.trim();
+        filter = filter.trim();
 
-        return filter(filterString, testNames);
+        return findByRegEx(testNames, filter);
     }
 
 
-    private ArrayList<String> filter(String filterString, ArrayList<String> testNames) {
-        Pattern pattern = Pattern.compile(filterString + ".*");
+    private ArrayList<String> findByRegEx(List<String> tests, String regexp) {
+        Pattern pattern = Pattern.compile(regexp + ".*");
         ArrayList<String> ret = new ArrayList<String>();
-        for (String testName : testNames) {
+        for (String testName : tests) {
             if (pattern.matcher(testName).matches()) {
                 ret.add(testName);
             }
@@ -72,44 +72,47 @@ public class JarTestsFinder {
     }
 
 
-    ArrayList<String> handleJar(String jarName) {
+    List<String> findTestClassesInJar(String jarPath) {
         ArrayList<String> tests = new ArrayList<String>();
         try {
-            Enumeration<JarEntry> entries = new JarFile(jarName).entries();
-            URLClassLoader loader = createClassLoader(jarName);
+            Enumeration<JarEntry> entries = new JarFile(jarPath).entries();
+            URLClassLoader loader = createClassLoader(jarPath);
             while (entries.hasMoreElements()) {
                 JarEntry jarEntry = entries.nextElement();
-                handleEntry(tests, loader, jarEntry);
+                handleJarEntry(tests, loader, jarEntry);
             }
         } catch (IOException e) {
-            throw new RuntimeException("can't find file '" + jarName + "', root from '" + new File(".").getAbsolutePath() + "'", e);
+            throw new RuntimeException("can't find file '" + jarPath + "', root from '" + new File(".").getAbsolutePath() + "'", e);
         }
         return tests;
     }
 
 
-    private void handleEntry(List<String> res, URLClassLoader loader, JarEntry possibleClass) {
+    private void handleJarEntry(List<String> validEntries, URLClassLoader loader, JarEntry possibleClass) {
         String clazzPath = possibleClass.getName();
         if (clazzPath.endsWith(".class")) {
-            String clazzName = massageToClassPath(clazzPath);
+            String clazzName = massageFilePathToClassPath(clazzPath);
             try {
                 Class clazz = loadClass(loader, clazzName);
                 if (!isAbstract(clazz.getModifiers())) {
-                    handleClass(res, clazz);
+                    handleClass(validEntries, clazz);
                 }
             } catch (NoClassDefFoundError e) {
                 // add it anyway. let junit show error
                 logger.info("can't find class - ", e);
-                res.add(clazzName);
+                validEntries.add(clazzName);
             }
         }
     }
 
     void handleClass(List<String> res, Class<?> clazz) {
-        boolean isSpec = isSpec(clazz);
-        if (isSpec) {
+        if (isSpec(clazz)) {
             res.add(clazz.getName());
             logger.info("adding spec class {}", clazz.getName());
+            return;
+        } else if (isRunWith(clazz)) {
+            res.add(clazz.getName());
+            logger.info("adding RunWith class {}", clazz.getName());
             return;
         } else {
             Method[] methods = clazz.getMethods();
@@ -117,7 +120,7 @@ public class JarTestsFinder {
                 Annotation[] annotations = method.getDeclaredAnnotations();
                 for (Annotation annotation : annotations) {
                     String annotationName = annotation.annotationType().getName();
-                    if (annotationName.endsWith(".Test")) {
+                    if (annotationName.endsWith(".Test") || annotationName.endsWith(".RunWith")) {
                         res.add(clazz.getName());
                         logger.info("adding test class {}", clazz.getName());
                         return;
@@ -125,6 +128,10 @@ public class JarTestsFinder {
                 }
             }
         }
+    }
+
+    private boolean isRunWith(Class<?> clazz) {
+        return clazz.getAnnotation(org.junit.runner.RunWith.class) != null;
     }
 
     private boolean isSpec(Class<?> clazz) {
@@ -152,7 +159,7 @@ public class JarTestsFinder {
     }
 
 
-    protected String massageToClassPath(String name) {
+    protected String massageFilePathToClassPath(String name) {
         String substring = name.substring(0, name.length() - 6);
         substring = substring.replaceAll("/", ".");
         substring = substring.replace("\\", ".");

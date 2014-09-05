@@ -1,6 +1,5 @@
 package org.oxenburgh.spritnesse;
 
-import org.apache.commons.lang.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -9,6 +8,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.oxenburgh.spritnesse.Utils.assertExpectedNumberOfClasses;
 
 /**
  * This file is part of Spritnesse.
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertTrue;
  * <p/>
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class JarTestsFinder_TestCase {
+public class JarFinder_JUnit_TestCase {
 
     public static final String TEST_JAR = "./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar";
     public final static int NUMBER_OF_GOOD_CLASSES = 6;
@@ -42,7 +42,7 @@ public class JarTestsFinder_TestCase {
 
     @Test(expected = RuntimeException.class)
     public void noJarFile() throws Exception {
-        new JarTestsFinder().calcMethods("NON-EXISTENT.jar");
+        new JarTestsFinder().findClassesIn("NON-EXISTENT.jar");
     }
 
 
@@ -50,7 +50,7 @@ public class JarTestsFinder_TestCase {
     public void findTestWithName() throws Exception {
         String expectedClassName = ".*Another_AppVerify";
 
-        List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
+        List<String> classes = new JarTestsFinder().findClassesInLike(TEST_JAR, expectedClassName);
 
         assertExpectedNumberOfClasses(expectedClassName, classes, 1);
         assertEquals("should be right name of '" + expectedClassName + "'", true, classes.get(0).endsWith(".Another_AppVerify"));
@@ -61,16 +61,8 @@ public class JarTestsFinder_TestCase {
     public void findTestWithRegularExpression() throws Exception {
         String expectedClassName = "org.oxenburgh.*";
 
-        List<String> classes = new JarTestsFinder().calcMethods(TEST_JAR, expectedClassName);
+        List<String> classes = new JarTestsFinder().findClassesInLike(TEST_JAR, expectedClassName);
 
         assertExpectedNumberOfClasses(expectedClassName, classes, NUMBER_OF_GOOD_CLASSES);
     }
-
-
-    private void assertExpectedNumberOfClasses(String expectedClassName, List<String> classes, int expected) {
-        assertEquals("should find "
-                + expected
-                + " tests in " + expectedClassName + ", found: \n" + StringUtils.join(classes, "\n"), expected, classes.size());
-    }
-
 }
