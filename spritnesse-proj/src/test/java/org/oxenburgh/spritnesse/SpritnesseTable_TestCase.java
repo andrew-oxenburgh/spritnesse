@@ -25,7 +25,7 @@ import static util.ListUtility.list;
  * <p/>
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class JunitTable_TestCase {
+public class SpritnesseTable_TestCase {
 
     private final JunitTable table = new JunitTable("");
 
