@@ -30,7 +30,7 @@ import static util.ListUtility.list;
  * <p/>
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class SpritnesseTable {
+public abstract class SpritnesseTable {
     static Logger logger = LoggerFactory.getLogger(JunitTable.class);
     private final CamelCaser camelCaser = new CamelCaser();
     String jarName;
@@ -55,12 +55,7 @@ public class SpritnesseTable {
             return list(list("no such jar found [" + jarName + "]"));
         }
 
-        List classNames;
-        if (args == null || args.isEmpty()) {
-            classNames = new JarTestsFinder().findClassesIn(jarName);
-        } else {
-            classNames = new JarTestsFinder().findClassesInLike(jarName, args.get(0).get(0));
-        }
+        List classNames = getClassesToBeTested(args);
 
         List classes = listOfClasses(classNames);
         List tests = runTests(classes);
@@ -76,6 +71,8 @@ public class SpritnesseTable {
         args.addAll(table);
         return args;
     }
+
+    abstract List getClassesToBeTested(List<List<String>> args);
 
     private String errorMessage() {
         return "can't find file " + jarName + " in " + new File(".").getAbsolutePath();

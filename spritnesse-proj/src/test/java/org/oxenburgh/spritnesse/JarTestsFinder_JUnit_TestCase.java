@@ -28,10 +28,10 @@ import static org.oxenburgh.spritnesse.Utils.assertExpectedNumberOfClasses;
  * <p/>
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class JarFinder_JUnit_TestCase {
+public class JarTestsFinder_JUnit_TestCase {
 
     public static final String TEST_JAR = "./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar";
-    public final static int NUMBER_OF_GOOD_CLASSES = 6;
+    public final static int NUMBER_OF_GOOD_CLASSES = 7;
 
 
     @BeforeClass

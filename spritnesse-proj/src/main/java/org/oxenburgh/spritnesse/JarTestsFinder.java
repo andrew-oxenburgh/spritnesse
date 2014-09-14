@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -19,6 +17,7 @@ import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 
 import static java.lang.reflect.Modifier.isAbstract;
+import static org.oxenburgh.spritnesse.Utils.createClassLoader;
 import static org.oxenburgh.spritnesse.Utils.loadClass;
 
 /**
@@ -43,8 +42,17 @@ public class JarTestsFinder {
 
     static Logger logger = LoggerFactory.getLogger(JarTestsFinder.class);
 
-    public List<String> findClassesIn(String jarName) {
-        return findTestClassesInJar(jarName);
+    boolean annotatedOnly = false;
+
+    public List<String> findAnnotatedClasses(String jarPath) {
+        annotatedOnly = true;
+
+        return findTestClassesInJar(jarPath);
+    }
+
+
+    public List<String> findClassesIn(String jarPath) {
+        return findTestClassesInJar(jarPath);
     }
 
 
@@ -56,19 +64,7 @@ public class JarTestsFinder {
 
         filter = filter.trim();
 
-        return findByRegEx(testNames, filter);
-    }
-
-
-    private ArrayList<String> findByRegEx(List<String> tests, String regexp) {
-        Pattern pattern = Pattern.compile(regexp + ".*");
-        ArrayList<String> ret = new ArrayList<String>();
-        for (String testName : tests) {
-            if (pattern.matcher(testName).matches()) {
-                ret.add(testName);
-            }
-        }
-        return ret;
+        return filterByRegEx(testNames, filter);
     }
 
 
@@ -88,6 +84,17 @@ public class JarTestsFinder {
     }
 
 
+    private ArrayList<String> filterByRegEx(List<String> tests, String regexp) {
+        Pattern pattern = Pattern.compile(regexp + ".*");
+        ArrayList<String> ret = new ArrayList<String>();
+        for (String testName : tests) {
+            if (pattern.matcher(testName).matches()) {
+                ret.add(testName);
+            }
+        }
+        return ret;
+    }
+
     private void handleJarEntry(List<String> validEntries, URLClassLoader loader, JarEntry possibleClass) {
         String clazzPath = possibleClass.getName();
         if (clazzPath.endsWith(".class")) {
@@ -100,13 +107,19 @@ public class JarTestsFinder {
             } catch (NoClassDefFoundError e) {
                 // add it anyway. let junit show error
                 logger.info("can't find class - ", e);
-                validEntries.add(clazzName);
+//                validEntries.add(clazzName);
             }
         }
     }
 
     void handleClass(List<String> res, Class<?> clazz) {
-        if (isSpec(clazz)) {
+        if (annotatedOnly) {
+            if (isSpritnesseInclude(clazz)) {
+                res.add(clazz.getName());
+                logger.info("adding @SpritnesseInclude class {}", clazz.getName());
+                return;
+            }
+        } else if (isSpec(clazz)) {
             res.add(clazz.getName());
             logger.info("adding spec class {}", clazz.getName());
             return;
@@ -134,6 +147,12 @@ public class JarTestsFinder {
         return clazz.getAnnotation(org.junit.runner.RunWith.class) != null;
     }
 
+
+    private boolean isSpritnesseInclude(Class<?> clazz) {
+        return clazz.getAnnotation(org.oxenburgh.spritnesse.SpritnesseInclude.class) != null;
+    }
+
+
     private boolean isSpec(Class<?> clazz) {
         boolean ret = false;
         try {
@@ -147,18 +166,6 @@ public class JarTestsFinder {
     }
 
 
-    URLClassLoader createClassLoader(String fileName) {
-        String urlPath = makeUrlPath(fileName);
-        URL url = null;
-        try {
-            url = new URL(urlPath);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        return URLClassLoader.newInstance(new URL[]{url});
-    }
-
-
     protected String massageFilePathToClassPath(String name) {
         String substring = name.substring(0, name.length() - 6);
         substring = substring.replaceAll("/", ".");
@@ -166,11 +173,5 @@ public class JarTestsFinder {
         return substring;
     }
 
-
-    private String makeUrlPath(String fileName) {
-        String path = new File(".").getAbsolutePath();
-        path = path.substring(0, path.length() - 2);
-        return "file:///" + path + "/" + fileName;
-    }
 
 }

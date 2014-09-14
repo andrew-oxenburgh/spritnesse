@@ -40,6 +40,11 @@ License along with this library.
 
     <dependencies>
         <dependency>
+            <groupId>org.oxenburgh</groupId>
+            <artifactId>spritnesse-api</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>

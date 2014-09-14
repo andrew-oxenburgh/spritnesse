@@ -1,6 +1,6 @@
 package org.oxenburgh.spritnesse;
 
-import java.util.List;
+import java.lang.annotation.*;
 
 /**
  * This file is part of Spritnesse.
@@ -20,20 +20,9 @@ import java.util.List;
  * <p/>
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class JunitTable extends SpritnesseTable {
-    public JunitTable(String jarName) {
-        super(jarName);
-    }
 
-    @Override
-    List getClassesToBeTested(List<List<String>> args) {
-        List classNames;
-        if (args == null || args.isEmpty()) {
-            classNames = new JarTestsFinder().findClassesIn(jarName);
-        } else {
-            classNames = new JarTestsFinder().findClassesInLike(jarName, args.get(0).get(0));
-        }
-        return classNames;
-    }
-
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@interface
+SpritnesseInclude{
 }

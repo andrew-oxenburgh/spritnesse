@@ -23,6 +23,9 @@ as an example.
 !2 Logging
 You'll find the log file in the root dir, called spritnesse.log. If you want to override this, place a logback.* file in the classpath ahead of the spritnesse-proj jar.
 
+!2 No arguments. run only annotated tests
+!|Table:AnnotatedTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
+
 !2 No arguments. Run all the tests to be found in the given jar
 !|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
 

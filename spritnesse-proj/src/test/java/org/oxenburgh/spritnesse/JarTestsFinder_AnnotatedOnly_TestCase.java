@@ -1,6 +1,14 @@
 package org.oxenburgh.spritnesse;
 
+import org.junit.Test;
+
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.oxenburgh.spritnesse.JarTestsFinder_JUnit_TestCase.TEST_JAR;
+import static org.oxenburgh.spritnesse.Utils.createClassLoader;
+import static org.oxenburgh.spritnesse.Utils.loadClass;
 
 /**
  * This file is part of Spritnesse.
@@ -20,20 +28,14 @@ import java.util.List;
  * <p/>
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
-public class JunitTable extends SpritnesseTable {
-    public JunitTable(String jarName) {
-        super(jarName);
-    }
+public class JarTestsFinder_AnnotatedOnly_TestCase {
 
-    @Override
-    List getClassesToBeTested(List<List<String>> args) {
-        List classNames;
-        if (args == null || args.isEmpty()) {
-            classNames = new JarTestsFinder().findClassesIn(jarName);
-        } else {
-            classNames = new JarTestsFinder().findClassesInLike(jarName, args.get(0).get(0));
-        }
-        return classNames;
+    @Test
+    public void findOnlyAnnotatedClasses() throws Exception {
+        List<String> annotatedClasses = new JarTestsFinder().findAnnotatedClasses(TEST_JAR);
+        assertEquals(1, annotatedClasses.size());
+        Class<?> clazz = loadClass(createClassLoader(TEST_JAR), annotatedClasses.get(0));
+        assertNotNull(clazz.getAnnotation(SpritnesseInclude.class));
     }
 
 }

@@ -48,4 +48,15 @@ public class SpockTable extends SpritnesseTable {
         }
         return super.doTable(args);
     }
+
+    @Override
+    List getClassesToBeTested(List<List<String>> args) {
+        List classNames;
+        if (args == null || args.isEmpty()) {
+            classNames = new JarTestsFinder().findClassesIn(jarName);
+        } else {
+            classNames = new JarTestsFinder().findClassesInLike(jarName, args.get(0).get(0));
+        }
+        return classNames;
+    }
 }

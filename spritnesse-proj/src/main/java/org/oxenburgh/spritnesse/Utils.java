@@ -2,6 +2,9 @@ package org.oxenburgh.spritnesse;
 
 import org.apache.commons.lang.StringUtils;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Collection;
 import java.util.List;
@@ -50,4 +53,22 @@ public class Utils {
                 + expected
                 + " tests in " + expectedClassName + ", found: \n" + StringUtils.join(classes, "\n"), expected, classes.size());
     }
+
+    static public URLClassLoader createClassLoader(String fileName) {
+        String urlPath = makeUrlPath(fileName);
+        URL url = null;
+        try {
+            url = new URL(urlPath);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        return URLClassLoader.newInstance(new URL[]{url});
+    }
+
+    static private String makeUrlPath(String fileName) {
+        String path = new File(".").getAbsolutePath();
+        path = path.substring(0, path.length() - 2);
+        return "file:///" + path + "/" + fileName;
+    }
+
 }

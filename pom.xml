@@ -9,6 +9,7 @@
     <name>test-junit-jar-creator</name>
 
     <modules>
+        <module>spritnesse-api</module>
         <module>test-junit</module>
         <module>test-spock</module>
         <!--<module>test-cucumber</module>-->
