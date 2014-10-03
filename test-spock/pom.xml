@@ -6,19 +6,19 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.oxenburgh</groupId>
   <artifactId>test-spock</artifactId>
-  <version>1.0</version>
+  <version>${parent.version}</version>
   <packaging>jar</packaging>
   <name>test-spock</name>
 
     <parent>
         <groupId>org.oxenburgh</groupId>
         <artifactId>spritnesse</artifactId>
-        <version>1.9.1</version>
+        <version>${spritnesse.version}}</version>
     </parent>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <!--<properties>-->
+        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+    <!--</properties>-->
 
     <build>
     <plugins>

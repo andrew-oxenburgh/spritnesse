@@ -21,7 +21,16 @@ License along with this library.
 
     <groupId>org.oxenburgh</groupId>
     <artifactId>spritnesse-proj</artifactId>
-    <version>1.9.1</version>
+    <version>${parent.version}</version>
+
+    <parent>
+        <groupId>org.oxenburgh</groupId>
+        <artifactId>spritnesse</artifactId>
+        <version>${spritnesse.version}}</version>
+    </parent>
+
+
+
     <packaging>jar</packaging>
     <name>spritnesse-proj</name>
     <modelVersion>4.0.0</modelVersion>

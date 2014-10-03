@@ -2,6 +2,7 @@ package org.oxenburgh.spritnesse;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -28,6 +29,7 @@ import static util.ListUtility.list;
 public class SpritnesseTable_TestCase {
 
     private final JunitTable table = new JunitTable("");
+    private List<List<String>> EMPTY_LIST_OF_LISTS = list(list(""));
 
 
     @Test
@@ -42,7 +44,7 @@ public class SpritnesseTable_TestCase {
 
     @Test
     public void whenPassedUnknownJar_saySomething() throws Exception {
-        List expected = list(list("no such jar found [unknown.jar]"));
+        List expected = list(list("no such jar found [unknown.jar]"), list("should find 1 test"));
         assertEquals(expected, new JunitTable("unknown.jar").doTable(list(list(""))));
     }
 
@@ -109,5 +111,25 @@ public class SpritnesseTable_TestCase {
                 "fail:exception2->message2"));
 
         assertEquals(expected, table.makeTable(list));
+    }
+
+
+    @Test
+    public void noTestsFound_() throws Exception {
+        SpritnesseTable spritnesseTable = new SpritnesseTable("") {
+            @Override
+            List getClassesToBeTested(List<List<String>> args) {
+                return new ArrayList();
+            }
+
+            @Override
+            List intDoTable(List<List<String>> args) throws ClassNotFoundException {
+                return new ArrayList();
+            }
+        };
+
+        List<List<String>> results = spritnesseTable.doTable(EMPTY_LIST_OF_LISTS);
+        assertEquals("should only be one result", 1, results.size());
+        assertEquals("should find 1 test", results.get(0).get(0));
     }
 }

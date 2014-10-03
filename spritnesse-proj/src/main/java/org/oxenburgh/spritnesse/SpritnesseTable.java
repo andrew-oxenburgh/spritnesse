@@ -47,10 +47,14 @@ public abstract class SpritnesseTable {
         }catch(RuntimeException e){
             logger.error("", e);
         }
+
+        if(ret.size() <= args.size()) {
+            ret.add(list("should find 1 test"));
+        }
         return ret;
     }
 
-    private List intDoTable(List<List<String>> args) throws ClassNotFoundException {
+    List intDoTable(List<List<String>> args) throws ClassNotFoundException {
         if (!new File(jarName).exists()) {
             return list(list("no such jar found [" + jarName + "]"));
         }

@@ -37,6 +37,10 @@ You'll find the log file in the root dir, called spritnesse.log. If you want to 
 !|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
 |org.oxen.*                                                         |
 
+!2 Argument - should find at least one test
+!|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
+|org.doesntexist.*                                                  |
+
 !2 Will run spock tests
 
 !|Table:SpockTable|./test-spock/target/test-spock-1.0.jar|

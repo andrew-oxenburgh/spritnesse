@@ -2,9 +2,10 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+
     <groupId>org.oxenburgh</groupId>
     <artifactId>spritnesse</artifactId>
-    <version>1.9.1</version>
+    <version>${spritnesse.version}}</version>
     <packaging>pom</packaging>
     <name>test-junit-jar-creator</name>
 
@@ -19,6 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
+        <spritnesse.version>1.10</spritnesse.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -27,7 +29,8 @@
             <groupId>org.fitnesse</groupId>
             <artifactId>fitnesse</artifactId>
             <version>20140623</version>
-        </dependency>        <dependency>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
