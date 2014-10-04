@@ -21,24 +21,24 @@ as an example.
 You'll find the log file in the root dir, called spritnesse.log. If you want to override this, place a logback.* file in the classpath ahead of the spritnesse-proj jar.
 
 !2 No arguments. run only annotated tests
-!|Table:AnnotatedTable|./test-junit/target/test-junit-1.11.jar|
+!|Table:AnnotatedTable|./test-junit/target/test-junit.jar|
 
 !2 No arguments. Run all the tests to be found in the given jar
-!|Table:JunitTable|./test-junit/target/test-junit-1.11.jar|
+!|Table:JunitTable|./test-junit/target/test-junit.jar|
 
 !2 unknown jar
 !|Table:JunitTable|non-existent.jar|
 |org.oxen.*                        |
 
 !2 Argument - filters on package, regexp and wildcard
-!|Table:JunitTable|./test-junit/target/test-junit-1.11.jar|
+!|Table:JunitTable|./test-junit/target/test-junit.jar|
 |org.oxen.*                                               |
 
 !2 Argument - should find at least one test
-!|Table:JunitTable|./test-junit/target/test-junit-1.11.jar|
+!|Table:JunitTable|./test-junit/target/test-junit.jar|
 |org.doesntexist.*                                        |
 
 !2 Will run spock tests
 
-!|Table:SpockTable|./test-spock/target/test-spock-1.11.jar|
+!|Table:SpockTable|./test-spock/target/test-spock.jar|
 |org.oxenburgh                                            |
