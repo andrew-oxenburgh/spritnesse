@@ -1,10 +1,7 @@
 !define TEST_SYSTEM {slim}
-!path ./spritnesse-proj/target/spritnesse-proj-1.9.1.jar
-!path ./test-junit/target/test-junit-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-!path ./test-spock/target/test-spock-1.0-jar-with-dependencies.jar
-!path ./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT-jar-with-dependencies.jar
-!path ./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT.jar
-!path ./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT-tests.jar
+!path ./spritnesse-proj/target/spritnesse-proj.jar
+!path ./test-junit/target/test-junit-jar-with-dependencies.jar
+!path ./test-spock/target/test-spock-jar-with-dependencies.jar
 
 |import                  |
 |org.oxenburgh.spritnesse|
@@ -24,29 +21,24 @@ as an example.
 You'll find the log file in the root dir, called spritnesse.log. If you want to override this, place a logback.* file in the classpath ahead of the spritnesse-proj jar.
 
 !2 No arguments. run only annotated tests
-!|Table:AnnotatedTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
+!|Table:AnnotatedTable|./test-junit/target/test-junit-1.11.jar|
 
 !2 No arguments. Run all the tests to be found in the given jar
-!|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
+!|Table:JunitTable|./test-junit/target/test-junit-1.11.jar|
 
 !2 unknown jar
 !|Table:JunitTable|non-existent.jar|
 |org.oxen.*                        |
 
 !2 Argument - filters on package, regexp and wildcard
-!|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
-|org.oxen.*                                                         |
+!|Table:JunitTable|./test-junit/target/test-junit-1.11.jar|
+|org.oxen.*                                               |
 
 !2 Argument - should find at least one test
-!|Table:JunitTable|./test-junit/target/test-junit-1.0.0-SNAPSHOT.jar|
-|org.doesntexist.*                                                  |
+!|Table:JunitTable|./test-junit/target/test-junit-1.11.jar|
+|org.doesntexist.*                                        |
 
 !2 Will run spock tests
 
-!|Table:SpockTable|./test-spock/target/test-spock-1.0.jar|
-|org.oxenburgh                                           |
-
-!2 Will run cucumber tests
-
-!|Table:CucumberTable|./test-cucumber/target/test-cucumber-1.0.0-SNAPSHOT-tests.jar|
-|.*Belly.*                                                                         |
+!|Table:SpockTable|./test-spock/target/test-spock-1.11.jar|
+|org.oxenburgh                                            |

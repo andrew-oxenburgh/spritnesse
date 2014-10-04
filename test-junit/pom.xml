@@ -22,35 +22,28 @@ License along with this library.
     Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
 
     -->
-    <groupId>org.oxenburgh</groupId>
     <artifactId>test-junit</artifactId>
-    <version>${parent.version}</version>
+    <version>${spritnesse.version}</version>
+    <name>test-junit</name>
 
     <parent>
-        <groupId>org.oxenburgh</groupId>
+        <groupId>org.oxenburgh.spritnesse</groupId>
         <artifactId>spritnesse</artifactId>
-        <version>${spritnesse.version}}</version>
+        <version>${spritnesse.version}</version>
     </parent>
 
 
 
-    <name>test-junit</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <parent>
-        <groupId>org.oxenburgh</groupId>
-        <artifactId>spritnesse</artifactId>
-        <version>1.9.1</version>
-    </parent>
-
     <dependencies>
         <dependency>
-            <groupId>org.oxenburgh</groupId>
+            <groupId>org.oxenburgh.spritnesse</groupId>
             <artifactId>spritnesse-api</artifactId>
-            <version>1.9.1</version>
+            <version>${spritnesse.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -106,6 +99,7 @@ License along with this library.
 </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -124,6 +118,18 @@ License along with this library.
                     </execution>
                 </executions>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-jar-plugin</artifactId>-->
+                <!--<version>2.5</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>test-jar</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

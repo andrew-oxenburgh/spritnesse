@@ -32,7 +32,8 @@ public class Spock_TestCase {
 
     static Logger logger = LoggerFactory.getLogger(Spock_TestCase.class);
 
-    public static final String TEST_JAR = "./test-spock/target/test-spock-1.0-jar-with-dependencies.jar";
+    public static final String TEST_JAR = "test-spock/target/test-spock-"
+            + "jar-with-dependencies.jar";
 
 
     @BeforeClass

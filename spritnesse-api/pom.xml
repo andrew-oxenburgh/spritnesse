@@ -19,27 +19,26 @@ License along with this library.
     Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
     -->
 
-    <groupId>org.oxenburgh</groupId>
+    <name>spritnesse-proj</name>
     <artifactId>spritnesse-api</artifactId>
-    <version>${spritnesse.version}</version>
+    <!--<version>${spritnesse.version}</version>-->
+
+    <packaging>jar</packaging>
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.oxenburgh</groupId>
+        <groupId>org.oxenburgh.spritnesse</groupId>
         <artifactId>spritnesse</artifactId>
         <version>${spritnesse.version}</version>
     </parent>
 
-
-
-    <packaging>jar</packaging>
-    <name>spritnesse-proj</name>
-    <modelVersion>4.0.0</modelVersion>
 
     <!--<properties>-->
         <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
     <!--</properties>-->
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

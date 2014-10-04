@@ -3,9 +3,14 @@
         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 
-    <groupId>org.oxenburgh</groupId>
+    <properties>
+        <spritnesse.version>1.12-SNAPSHOT</spritnesse.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <groupId>org.oxenburgh.spritnesse</groupId>
     <artifactId>spritnesse</artifactId>
-    <version>${spritnesse.version}}</version>
+    <version>${spritnesse.version}</version>
     <packaging>pom</packaging>
     <name>test-junit-jar-creator</name>
 
@@ -15,20 +20,16 @@
         <module>test-spock</module>
         <!--<module>test-cucumber</module>-->
         <module>spritnesse-proj</module>
+        <module>spritnesse-proj-test</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>
-
-    <properties>
-        <spritnesse.version>1.10</spritnesse.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.fitnesse</groupId>
             <artifactId>fitnesse</artifactId>
-            <version>20140623</version>
+            <version>20140901</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -42,6 +43,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>

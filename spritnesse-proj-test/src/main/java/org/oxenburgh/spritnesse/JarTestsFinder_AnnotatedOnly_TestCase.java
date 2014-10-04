@@ -6,7 +6,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.oxenburgh.spritnesse.JarTestsFinder_JUnit_TestCase.TEST_JAR;
 import static org.oxenburgh.spritnesse.Utils.createClassLoader;
 import static org.oxenburgh.spritnesse.Utils.loadClass;
 
@@ -29,6 +28,8 @@ import static org.oxenburgh.spritnesse.Utils.loadClass;
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
 public class JarTestsFinder_AnnotatedOnly_TestCase {
+
+    public static final String TEST_JAR = "test-junit/target/test-junit-jar-with-dependencies.jar";
 
     @Test
     public void findOnlyAnnotatedClasses() throws Exception {

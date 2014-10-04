@@ -44,7 +44,7 @@ public class SpritnesseTable_TestCase {
 
     @Test
     public void whenPassedUnknownJar_saySomething() throws Exception {
-        List expected = list(list("no such jar found [unknown.jar]"), list("should find 1 test"));
+        List expected = list(list("no such jar found [unknown.jar]"));
         assertEquals(expected, new JunitTable("unknown.jar").doTable(list(list(""))));
     }
 

@@ -48,7 +48,7 @@ public abstract class SpritnesseTable {
             logger.error("", e);
         }
 
-        if(ret.size() <= args.size()) {
+        if(ret.size() < 1) {
             ret.add(list("should find 1 test"));
         }
         return ret;

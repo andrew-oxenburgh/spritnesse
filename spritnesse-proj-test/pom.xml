@@ -19,17 +19,15 @@ License along with this library.
     Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
     -->
 
-    <artifactId>spritnesse-proj</artifactId>
-    <name>spritnesse-proj</name>
+    <artifactId>spritnesse-proj-test</artifactId>
     <version>${spritnesse.version}</version>
+    <name>spritnesse-proj-test</name>
 
     <parent>
         <groupId>org.oxenburgh.spritnesse</groupId>
         <artifactId>spritnesse</artifactId>
         <version>${spritnesse.version}</version>
     </parent>
-
-
 
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
@@ -47,9 +45,13 @@ License along with this library.
         </dependency>
         <dependency>
             <groupId>org.oxenburgh.spritnesse</groupId>
+            <artifactId>spritnesse-proj</artifactId>
+            <version>${spritnesse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.oxenburgh.spritnesse</groupId>
             <artifactId>test-spock</artifactId>
             <version>${spritnesse.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
