@@ -1,0 +1,10 @@
+!define TEST_SYSTEM {slim}
+!path ./spritnesse-proj/target/spritnesse-proj-jar-with-dependencies.jar
+!path ./spritnesse-proj-test/target/spritnesse-proj-test.jar
+!path ./test-spock/target/test-spock.jar
+
+|import                  |
+|org.oxenburgh.spritnesse|
+
+!|Table:JunitTable|./spritnesse-proj-test/target/spritnesse-proj-test.jar|
+|.*oxenburgh.spritnesse.[A-Z]+.*                                         |
