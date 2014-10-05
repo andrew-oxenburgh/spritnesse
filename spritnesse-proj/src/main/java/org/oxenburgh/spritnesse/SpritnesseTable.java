@@ -51,7 +51,8 @@ public abstract class SpritnesseTable {
         if(ret.size() < 1) {
             ret.add(list("should find 1 test"));
         }
-        return ret;
+        args.addAll(ret);
+        return args;
     }
 
     List intDoTable(List<List<String>> args) throws ClassNotFoundException {
@@ -71,16 +72,10 @@ public abstract class SpritnesseTable {
                 row.set(i, "ignore:" + s);
             }
         }
-
-        args.addAll(table);
-        return args;
+        return table;
     }
 
     abstract List getClassesToBeTested(List<List<String>> args);
-
-    private String errorMessage() {
-        return "can't find file " + jarName + " in " + new File(".").getAbsolutePath();
-    }
 
     List<Class> listOfClasses(List<String> classNames) throws ClassNotFoundException {
         List<Class> classes = new ArrayList<Class>();

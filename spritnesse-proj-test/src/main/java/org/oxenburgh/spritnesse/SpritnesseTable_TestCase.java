@@ -1,12 +1,14 @@
 package org.oxenburgh.spritnesse;
 
+import static org.junit.Assert.assertEquals;
+import static org.oxenburgh.spritnesse.Helper.assertFoundCell;
+import static org.oxenburgh.spritnesse.Helper.assertFoundLine;
+import static util.ListUtility.list;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static util.ListUtility.list;
 
 /**
  * This file is part of Spritnesse.
@@ -29,6 +31,7 @@ import static util.ListUtility.list;
 public class SpritnesseTable_TestCase {
 
     private final JunitTable table = new JunitTable("");
+
     private List<List<String>> EMPTY_LIST_OF_LISTS = list(list(""));
 
 
@@ -44,8 +47,8 @@ public class SpritnesseTable_TestCase {
 
     @Test
     public void whenPassedUnknownJar_saySomething() throws Exception {
-        List expected = list(list("no such jar found [unknown.jar]"));
-        assertEquals(expected, new JunitTable("unknown.jar").doTable(list(list(""))));
+        List expected = list(list(), list("no such jar found [unknown.jar]"));
+        assertEquals(expected + "", new JunitTable("unknown.jar").doTable(list(list(""))) + "");
     }
 
 
@@ -83,9 +86,8 @@ public class SpritnesseTable_TestCase {
     public void givenTwoFailingTests_oneWithError_secondOneDoesntHaveClassName_createTable() throws Exception {
         List list = list("fail:class:method:exception:message:trace", "fail:class:method2:exception2:message2:trace2");
 
-        List expected = list(list("report:class", "report:method",
-                "fail:exception->message"), list("report:", "report:method 2",
-                "fail:exception2->message2"));
+        List expected = list(list("report:class", "report:method", "fail:exception->message"),
+                list("report:", "report:method 2", "fail:exception2->message2"));
 
         assertEquals(expected, table.makeTable(list));
     }
@@ -95,8 +97,7 @@ public class SpritnesseTable_TestCase {
     public void shouldntHaveUnescapedSingleQuotesInTrace() throws Exception {
         List list = list("fail:class:method:exception:message:here's an error");
 
-        List expected = list(list("report:class", "report:method",
-                "fail:exception->message"));
+        List expected = list(list("report:class", "report:method", "fail:exception->message"));
 
         assertEquals(expected, table.makeTable(list));
     }
@@ -106,21 +107,21 @@ public class SpritnesseTable_TestCase {
     public void givenFailingTests_withColon_showsFullError() throws Exception {
         List list = list("fail:class:method:exception:message:trace", "fail:class:method2:exception2:message2:trace2");
 
-        List expected = list(list("report:class", "report:method",
-                "fail:exception->message"), list("report:", "report:method 2",
-                "fail:exception2->message2"));
+        List expected = list(list("report:class", "report:method", "fail:exception->message"),
+                list("report:", "report:method 2", "fail:exception2->message2"));
 
         assertEquals(expected, table.makeTable(list));
     }
 
 
     @Test
-    public void noTestsFound_() throws Exception {
+    public void noTestsFound() throws Exception {
         SpritnesseTable spritnesseTable = new SpritnesseTable("") {
             @Override
             List getClassesToBeTested(List<List<String>> args) {
                 return new ArrayList();
             }
+
 
             @Override
             List intDoTable(List<List<String>> args) throws ClassNotFoundException {
@@ -129,7 +130,7 @@ public class SpritnesseTable_TestCase {
         };
 
         List<List<String>> results = spritnesseTable.doTable(EMPTY_LIST_OF_LISTS);
-        assertEquals("should only be one result", 1, results.size());
-        assertEquals("should find 1 test", results.get(0).get(0));
+        assertEquals("should get 2 lines", 2, results.size());
+        assertFoundCell(results, "should find 1 test");
     }
 }

@@ -20,8 +20,8 @@ License along with this library.
     -->
 
     <artifactId>spritnesse-proj-test</artifactId>
-    <version>${spritnesse.version}</version>
     <name>spritnesse-proj-test</name>
+    <version>${spritnesse.version}</version>
 
     <parent>
         <groupId>org.oxenburgh.spritnesse</groupId>

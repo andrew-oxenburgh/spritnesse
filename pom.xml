@@ -4,7 +4,7 @@
 
 
     <properties>
-        <spritnesse.version>1.12-SNAPSHOT</spritnesse.version>
+        <spritnesse.version>1.13</spritnesse.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

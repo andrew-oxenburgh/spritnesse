@@ -46,7 +46,6 @@ class HelloSpockTest extends Specification {
         true
     }
 
-    @Ignore
     def 'demo method error'(){
         given: 'demo given error'
         true
