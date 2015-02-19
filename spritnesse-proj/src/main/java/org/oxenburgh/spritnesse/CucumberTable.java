@@ -1,8 +1,10 @@
 package org.oxenburgh.spritnesse;
 
-import java.util.List;
+import static java.util.Arrays.asList;
 
-import static util.ListUtility.list;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This file is part of Spritnesse.
@@ -43,7 +45,7 @@ public class CucumberTable extends JunitTable {
     @Override
     public List doTable(List<List<String>> args) throws ClassNotFoundException {
         if (!cucumberAvailable) {
-            return list(list("cucumber unavailable on classpath"));
+            return asList(asList("cucumber unavailable on classpath"));
         }
         return super.doTable(args);
     }

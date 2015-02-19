@@ -1,7 +1,7 @@
-<configuration>
+<configuration scan="30 seconds">
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>spritnesse.log</file>
+        <file>/tmp/spritnesse.log</file>
         <append>true</append>
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
@@ -15,6 +15,8 @@
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
         </encoder>
     </appender>
+
+    <!--<logger name="org.oxenburgh" level="DEBUG"/>-->
 
     <root level="DEBUG">
         <appender-ref ref="FILE"/>

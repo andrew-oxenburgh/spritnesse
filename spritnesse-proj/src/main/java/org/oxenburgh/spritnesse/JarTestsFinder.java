@@ -159,7 +159,13 @@ public class JarTestsFinder {
                 }
             }
         }
+        catch (SecurityException e) {
+            //swallow
+        }
         catch (NoClassDefFoundError e) {
+            //swallow
+        }
+        catch (IllegalAccessError e) {
             //swallow
         }
     }

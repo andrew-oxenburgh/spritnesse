@@ -1,8 +1,8 @@
 package org.oxenburgh.spritnesse;
 
-import java.util.List;
+import static java.util.Arrays.asList;
 
-import static util.ListUtility.list;
+import java.util.List;
 
 /**
  * This file is part of Spritnesse.
@@ -44,7 +44,7 @@ public class SpockTable extends SpritnesseTable {
     @Override
     public List doTable(List<List<String>> args) throws ClassNotFoundException {
         if(!spockAvailable) {
-            return list(list("spock unavailable on classpath"));
+            return asList(asList("spock unavailable on classpath"));
         }
         return super.doTable(args);
     }

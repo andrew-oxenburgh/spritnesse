@@ -10,7 +10,7 @@
 
     <groupId>org.oxenburgh.spritnesse</groupId>
     <artifactId>spritnesse</artifactId>
-    <version>${spritnesse.version}</version>
+    <version>1.13</version>
     <packaging>pom</packaging>
     <name>test-junit-jar-creator</name>
 
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>org.fitnesse</groupId>
             <artifactId>fitnesse</artifactId>
-            <version>20140901</version>
+            <version>20150114</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -72,8 +72,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>

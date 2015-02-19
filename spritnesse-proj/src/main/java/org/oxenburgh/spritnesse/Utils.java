@@ -41,7 +41,10 @@ public class Utils {
         try {
             return loader.loadClass(clazzName);
         }
-        catch (NoClassDefFoundError e) {
+        catch (SecurityException e) {
+//            throw new RuntimeException("can't find '" + clazzName + "' in loader '" + loader + "'", e);
+        }
+        catch (LinkageError e) {
 //            throw new RuntimeException("can't find '" + clazzName + "' in loader '" + loader + "'", e);
         }
         catch (ClassNotFoundException e) {

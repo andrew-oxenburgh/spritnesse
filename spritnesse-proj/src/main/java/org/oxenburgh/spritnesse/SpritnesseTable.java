@@ -7,10 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.reflect.Modifier.isAbstract;
-import static util.ListUtility.list;
+import static java.util.Arrays.asList;
 
 /**
  * This file is part of Spritnesse.
@@ -31,7 +32,7 @@ import static util.ListUtility.list;
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
 public abstract class SpritnesseTable {
-    static Logger logger = LoggerFactory.getLogger(JunitTable.class);
+    static Logger logger = LoggerFactory.getLogger(SpritnesseTable.class);
     private final CamelCaser camelCaser = new CamelCaser();
     String jarName;
 
@@ -41,15 +42,16 @@ public abstract class SpritnesseTable {
 
     public List doTable(List<List<String>> args) throws ClassNotFoundException {
         logger.info("inside doTable");
-        List ret = null;
+        List ret = asList(asList("failed somewhere."));
         try {
             ret = intDoTable(args);
         }catch(RuntimeException e){
             logger.error("", e);
+            e.printStackTrace();
         }
 
         if(ret.size() < 1) {
-            ret.add(list("should find 1 test"));
+            ret.add(asList("should find 1 test"));
         }
         args.addAll(ret);
         return args;
@@ -57,7 +59,7 @@ public abstract class SpritnesseTable {
 
     List intDoTable(List<List<String>> args) throws ClassNotFoundException {
         if (!new File(jarName).exists()) {
-            return list(list("no such jar found [" + jarName + "]"));
+            return asList(asList("no such jar found [" + jarName + "]"));
         }
 
         List classNames = getClassesToBeTested(args);
@@ -134,11 +136,11 @@ public abstract class SpritnesseTable {
             List<String> list;
 
             if (error == null) {
-                list = list(clazz, method, status);
+                list = asList(clazz, method, status);
             } else {
                 String message = parts[4];
                 String text = "fail:" + error + "->" + message;
-                list = list(clazz, method, text);
+                list = asList(clazz, method, text);
             }
             arrayLists.add(list);
         }

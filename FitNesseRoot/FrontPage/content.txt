@@ -1,3 +1,13 @@
+!1 Spritnesse
 
+I like fitnesse because it runs in a browser and testers can see what's going on.
 
-!contents -R3
+I don't like fitnesse because it's a terrible language and ends up with over wrought, un refactorable tests.
+
+I love junit, spock, cucumber and a whole bunch of other testing frameworks.
+
+What if we could join these up?
+
+Well now you can, with '''Spritnesse'''
+
+!contents 
