@@ -60,6 +60,7 @@ License along with this library.
             <groupId>org.fitnesse</groupId>
             <artifactId>fitnesse</artifactId>
             <version>20150114</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
