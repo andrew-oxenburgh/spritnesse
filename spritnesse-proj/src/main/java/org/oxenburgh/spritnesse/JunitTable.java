@@ -1,5 +1,8 @@
 package org.oxenburgh.spritnesse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -21,12 +24,16 @@ import java.util.List;
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
 public class JunitTable extends SpritnesseTable {
+
+    static Logger logger = LoggerFactory.getLogger(JunitTable.class);
+
     public JunitTable(String jarName) {
         super(jarName);
     }
 
     @Override
     List getClassesToBeTested(List<List<String>> args) {
+        logger.info("entering JunitTable");
         List classNames;
         if (args == null || args.isEmpty()) {
             classNames = new JarTestsFinder().findClassesIn(jarName);

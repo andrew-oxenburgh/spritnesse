@@ -2,6 +2,9 @@ package org.oxenburgh.spritnesse;
 
 import static java.util.Arrays.asList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -24,6 +27,9 @@ import java.util.List;
  */
 public class SpockTable extends SpritnesseTable {
 
+    static Logger log = LoggerFactory.getLogger(SpockTable.class);
+
+
     boolean spockAvailable = false;
 
     public SpockTable(String jarName) {
@@ -43,6 +49,7 @@ public class SpockTable extends SpritnesseTable {
 
     @Override
     public List doTable(List<List<String>> args) throws ClassNotFoundException {
+        log.info("entering SpockTable");
         if(!spockAvailable) {
             return asList(asList("spock unavailable on classpath"));
         }

@@ -31,8 +31,9 @@ import java.util.List;
 public class JunitListener extends RunListener {
 
     private List<String> testNames = new ArrayList<String>();
+    private List<List<String>> testResults = new ArrayList<List<String>>();
 
-    String currentKey;
+    private String currentKey;
 
     boolean failed;
 
@@ -57,25 +58,39 @@ public class JunitListener extends RunListener {
     public void testFailure(Failure failure) throws Exception {
         testNames.remove(currentKey);
         failed = true;
-
-        testNames.add("fail" + ":" + currentKey + ":" + failure.getException() + ":" + failure.getMessage() + ":" + failure.getTrace());
-    }
-
-
-    private void prependCurrentTest(String prepend) {
-        testNames.remove(currentKey);
-        testNames.add(prepend + ":" + currentKey);
+        ArrayList<String> res = new ArrayList<>();
+        res.add("fail");
+        res.add(currentKey);
+        res.add(failure.getException()+"");
+        res.add(failure.getMessage() + "," + failure.getTrace());
+        testResults.add(res);
     }
 
 
     @Override
     public void testIgnored(Description description) throws Exception {
         testNames.add("ignore:" + createKey(description));
+        ArrayList<String> res = new ArrayList<>();
+        res.add("ignore");
+        res.add(createKey(description));
+        testResults.add(res);
+    }
+
+
+    private void prependCurrentTest(String prepend) {
+        testNames.remove(currentKey);
+        ArrayList<String> res = new ArrayList<>();
+        res.add(prepend);
+        res.add(currentKey);
+        testResults.add(res);
     }
 
 
     public List<String> getTestNames() {
         return testNames;
+    }
+    public List<List<String>> getTestResults() {
+        return testResults;
     }
 
 

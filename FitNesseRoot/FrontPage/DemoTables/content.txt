@@ -2,9 +2,13 @@
 !path ./spritnesse-proj/target/spritnesse-proj-jar-with-dependencies.jar
 !path ./spritnesse-proj-test/target/spritnesse-proj-test.jar
 !path ./test-spock/target/test-spock.jar
+!path ./test-spock/target/test-cucumber.jar
 
 |import                  |
 |org.oxenburgh.spritnesse|
+
+!|Table:SpockTable|./test-spock/target/test-spock.jar|
+|org.oxenburgh.[A-Za-z]+.*                              |
 
 !|Table:JunitTable|./spritnesse-proj-test/target/spritnesse-proj-test.jar|
 |.*oxenburgh.spritnesse.[A-Z]+.*                                         |

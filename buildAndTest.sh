@@ -1,6 +1,6 @@
+#!/bin/bash
 
 
-
-mvn clean package -DskipTests=true
+./build.sh
 
 mvn test

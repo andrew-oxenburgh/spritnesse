@@ -5,7 +5,6 @@ import spock.lang.Specification
 
 class HelloSpockTest extends Specification {
 
-    @Ignore
     def "length of Spock's and his friends' names"() {
         expect:
         name.size() == length
@@ -58,7 +57,7 @@ class HelloSpockTest extends Specification {
     }
 
     @Ignore
-    def 'addition'(){
+    def 'this test is ignored'(){
         given: '2 numbers'
         def i = 2
         def j = 3

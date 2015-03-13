@@ -1,6 +1,7 @@
 package org.oxenburgh.spritnesse;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.oxenburgh.spritnesse.Helper.assertFoundLine;
 
 import org.junit.Before;
@@ -10,6 +11,7 @@ import org.oxenburgh.HelloSpockTest;
 import org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue;
 import org.oxenburgh.spritnesse.enclosed.IgnoredClass_withoutValue;
 import org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail;
+import org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail_withSemiColon;
 import org.oxenburgh.spritnesse.enclosed.TestWithIgnoredMethod;
 import org.oxenburgh.spritnesse.enclosed.TestWithOnePassingMethod;
 import org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods;
@@ -18,15 +20,15 @@ import java.util.List;
 
 /**
  * This file is part of Spritnesse.
- * <p/>
+ * <p>
  * This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3.0 of the License, or (at your option) any later version.
- * <p/>
+ * <p>
  * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- * <p/>
+ * <p>
  * You should have received a copy of the GNU Lesser General Public License along with this library.
- * <p/>
+ * <p>
  * Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
  */
 public class JunitListener_TestCase {
@@ -44,74 +46,91 @@ public class JunitListener_TestCase {
 
     @Test
     public void oneMethod_spock() throws Exception {
-        List<String> names = runWithClass(HelloSpockTest.class);
+        List<List<String>> names = runWithClass(HelloSpockTest.class);
         assertEquals(6, names.size());
-        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:length of Spock's and his friends' names");
-        assertFoundLine(names, "fail:org.oxenburgh.HelloSpockTest:demo method error:.*");
-        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:addition");
-        assertFoundLine(names, "pass:org.oxenburgh.HelloSpockTest:demo method 3");
-        assertFoundLine(names, "pass:org.oxenburgh.HelloSpockTest:demo method 2");
-        assertFoundLine(names, "pass:org.oxenburgh.HelloSpockTest:demo method 1");
+//        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:length of Spock's and his friends' names");
+//        assertFoundLine(names, "fail:org.oxenburgh.HelloSpockTest:demo method error:.*");
+//        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:addition");
+        assertFoundLine(names, "pass.+org.oxenburgh.HelloSpockTest.+demo method 3");
+        assertFoundLine(names, "pass.+org.oxenburgh.HelloSpockTest.+demo method 2");
+        assertFoundLine(names, "pass.+org.oxenburgh.HelloSpockTest.+demo method 1");
     }
 
 
     @Test
     public void oneMethod_getName() throws Exception {
-        List<String> names = runWithClass(TestWithOnePassingMethod.class);
+        List<List<String>> names = runWithClass(TestWithOnePassingMethod.class);
 
         assertEquals(1, names.size());
-        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestWithOnePassingMethod:testPass", names.get(0));
+        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestWithOnePassingMethod.+testPass", names.get(0));
     }
 
 
     @Test
     public void twoMethods_getNames() throws Exception {
-        List<String> names = runWithClass(TestWithTwoPassingMethods.class);
+        List<List<String>> names = runWithClass(TestWithTwoPassingMethods.class);
 
         assertEquals(2, names.size());
-        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods:testOnePass", names.get(0));
-        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods:testTwoPass", names.get(1));
+        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods.+testOnePass", names.get(0));
+        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods.+testTwoPass", names.get(1));
     }
 
 
     @Test
     public void twoMethods_oneFail() throws Exception {
-        List<String> names = runWithClass(TestTwoMethodsOneFail.class);
+        List<List<String>> names = runWithClass(TestTwoMethodsOneFail.class);
 
         assertEquals(2, names.size());
         String prefix =
-                "fail:org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail:testFail:java.lang.AssertionError: something more:something more:java.lang.AssertionError: something more\n";
-        assertEquals("should include stack trace", prefix.trim(), names.get(0).substring(0, prefix.length()).trim());
-        assertEquals("pass:org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail:testPass", names.get(1));
+                "fail.+org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail.+testFail:java.lang.AssertionError: something more.+something more,java.lang.AssertionError.+ something more\n";
+        //        assertEquals("should include stack trace", prefix.trim(), names.get(0).substring(0, prefix.length()).trim());
+        assertFoundLine(names, "pass:org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail:testPass");
+    }
+
+
+    @Test
+    public void twoMethods_oneFail_withSemiColon() throws Exception {
+        List<List<String>> names = runWithClass(TestTwoMethodsOneFail_withSemiColon.class);
+
+        assertEquals(2, names.size());
+        String prefix =
+                "fail:org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail_withSemiColon:testFail:java.lang.AssertionError: there are 2 semi-colons here:here's the first:and here's the second:th";
+//                assertStringEqualsList("should include stack trace", prefix.trim(), names.get(0).substring(0, prefix.length()).trim());
+        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail_withSemiColon.+testPass", names.get(1));
     }
 
 
     @Test
     public void ignoredMethodsIgnored() throws Exception {
-        List<String> names = runWithClass(TestWithIgnoredMethod.class);
+        List<List<String>> names = runWithClass(TestWithIgnoredMethod.class);
         assertEquals(1, names.size());
-        assertEquals("ignore:org.oxenburgh.spritnesse.enclosed.TestWithIgnoredMethod:testIgnored", names.get(0));
+        assertStringEqualsList("ignore.+org.oxenburgh.spritnesse.enclosed.TestWithIgnoredMethod.+testIgnored", names.get(0));
     }
 
 
     @Test
     public void ignoredClassIgnored() throws Exception {
-        List<String> names = runWithClass(IgnoredClass_withoutValue.class);
+        List<List<String>> names = runWithClass(IgnoredClass_withoutValue.class);
         assertEquals(1, names.size());
-        assertEquals("ignore:org.oxenburgh.spritnesse.enclosed.IgnoredClass_withoutValue:class ignored", names.get(0));
+        assertStringEqualsList("ignore.+org.oxenburgh.spritnesse.enclosed.IgnoredClass_withoutValue.+class ignored", names.get(0));
     }
 
 
     @Test
     public void ignoredClassIgnored_showValue() throws Exception {
-        List<String> names = runWithClass(IgnoredClass_withValue.class);
+        List<List<String>> names = runWithClass(IgnoredClass_withValue.class);
         assertEquals(1, names.size());
-        assertEquals("ignore:org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue:some value", names.get(0));
+        assertStringEqualsList("ignore.+org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue.+some value", names.get(0));
     }
 
 
-    private List<String> runWithClass(Class clazz) throws Exception {
+    private void assertStringEqualsList(String expected, List<String> actual) {
+        assertTrue(String.format("didn't find [%s] in [%s]", expected, actual), (actual + "").matches("^.+" + expected + ".+$"));
+    }
+
+
+    private List<List<String>> runWithClass(Class clazz) throws Exception {
         core.run(clazz);
-        return listener.getTestNames();
+        return listener.getTestResults();
     }
 }

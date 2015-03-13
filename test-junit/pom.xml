@@ -23,13 +23,13 @@ License along with this library.
 
     -->
     <artifactId>test-junit</artifactId>
-    <version>1.13</version>
+    <version>1.14</version>
     <name>test-junit</name>
 
     <parent>
         <groupId>org.oxenburgh.spritnesse</groupId>
         <artifactId>spritnesse</artifactId>
-        <version>1.13</version>
+        <version>1.14</version>
     </parent>
 
 
@@ -135,8 +135,8 @@ License along with this library.
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
