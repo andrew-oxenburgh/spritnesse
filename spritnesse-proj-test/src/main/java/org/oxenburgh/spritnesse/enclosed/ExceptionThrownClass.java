@@ -1,12 +1,7 @@
-package org.oxenburgh.spritnesse;
+package org.oxenburgh.spritnesse.enclosed;
 
-import static org.junit.Assert.assertNotNull;
-
+import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-
-import javax.annotation.Resource;
 
 /**
  This file is part of Spritnesse.
@@ -24,19 +19,15 @@ import javax.annotation.Resource;
  You should have received a copy of the GNU Lesser General Public
  License along with this library.
 
- <p/>
  Copyright (c) 2014, Andrew Oxenburgh, All rights reserved.
+
  */
 
-@ContextConfiguration("classpath:/spring.xml")
-public class SpringBean_AppVerify extends AbstractJUnit4SpringContextTests {
-
-    @Resource(name = "thingy")
-    String thingy;
-
+public class ExceptionThrownClass {
 
     @Test
-    public void demo() {
-        assertNotNull(thingy);
+    public void test() throws Exception {
+        throw new RuntimeException("ExceptionThrownMessage");
     }
+
 }

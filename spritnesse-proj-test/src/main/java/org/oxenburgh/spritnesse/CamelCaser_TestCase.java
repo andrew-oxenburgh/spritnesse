@@ -48,88 +48,95 @@ public class CamelCaser_TestCase {
 
     @Test
     public void removeCamelCasing_everythingLowerCase_spacesInsteadOfCapitals() throws Exception {
-        assertTransorm("me here", "testMeHere");
+        assertSentenizes("me here", "testMeHere");
+    }
+
+
+    @Test
+    public void removeCamelCasing_keepsPrefisNumbers() throws Exception {
+        assertSentenizes("1. test  me  here", "1. test Me Here");
+        assertSentenizes("1.test  me  here", "1.test Me Here");
     }
 
 
     @Test
     public void handlesUnderScores_andNumbers() throws Exception {
-        assertTransorm("a 1, advert", "a1_advert");
+        assertSentenizes("a 1, advert", "a1_advert");
     }
 
 
     @Test
     public void handlesMultiDigitNumbers() throws Exception {
-        assertTransorm("a 12 a", "a12A");
+        assertSentenizes("a 12 a", "a12A");
     }
 
 
     @Test
     public void handlesSingleDigitNumbers() throws Exception {
-        assertTransorm("a 1 a", "a1A");
+        assertSentenizes("a 1 a", "a1A");
     }
 
 
     @Test
     public void numbers_littleLettersFollowingNumberAreAppendedToNumber() throws Exception {
-        assertTransorm("a 1a", "a1a");
+        assertSentenizes("a 1a", "a1a");
     }
 
 
     @Test
     public void numbers_bigLettersFollowingNumberAreSeparatedFromNumber() throws Exception {
-        assertTransorm("a 1 a", "a1A");
+        assertSentenizes("a 1 a", "a1A");
     }
 
 
     @Test
     public void ignorePrefixTest() throws Exception {
-        assertTransorm("a b", "TestAB");
+        assertSentenizes("a b", "TestAB");
     }
 
 
     @Test
     public void ignorePrefixTest_lowerCase() throws Exception {
-        assertTransorm("a b", "testAB");
+        assertSentenizes("a b", "testAB");
     }
 
 
     @Test
     public void includeMidfixTest() throws Exception {
-        assertTransorm("a test a", "aTestA");
+        assertSentenizes("a test a", "aTestA");
     }
 
 
     @Test
     public void removePostfixTestCase() throws Exception {
-        assertTransorm("a", "aTestCase");
+        assertSentenizes("a", "aTestCase");
     }
 
 
     @Test
     public void removePostfixTest() throws Exception {
-        assertTransorm("a", "aTest");
+        assertSentenizes("a", "aTest");
     }
 
 
     @Test
     public void includeMidfixTestCase() throws Exception {
-        assertTransorm("a test case a", "aTestCaseA");
+        assertSentenizes("a test case a", "aTestCaseA");
     }
 
 
     @Test
     public void ignorePostfixAppVerify() throws Exception {
-        assertTransorm("a", "aAppVerify");
+        assertSentenizes("a", "aAppVerify");
     }
 
 
     @Test
     public void includeMidfixAppVerify() throws Exception {
-        assertTransorm("a app verify a", "aAppVerifyA");
+        assertSentenizes("a app verify a", "aAppVerifyA");
     }
 
-    private void assertTransorm(String expected, String input) {
+    private void assertSentenizes(String expected, String input) {
         assertEquals(expected, camelCaser.sentenize(input));
     }
 

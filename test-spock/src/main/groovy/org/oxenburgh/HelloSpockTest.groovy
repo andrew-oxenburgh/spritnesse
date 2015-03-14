@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class HelloSpockTest extends Specification {
 
-    def "length of Spock's and his friends' names"() {
+    def "1. length of Spock's and his friends' names"() {
         expect:
         name.size() == length
 
@@ -16,7 +16,7 @@ class HelloSpockTest extends Specification {
         "Scotty" | 6
     }
 
-    def 'demo method 1'(){
+    def '2. demo method 1'(){
         given: 'demo given 1'
         true
         when: 'demo when 1'
@@ -25,7 +25,7 @@ class HelloSpockTest extends Specification {
         true
     }
 
-    def 'demo method 3'(){
+    def '3. demo method 3'(){
         given: 'demo given 1'
         true
         when: 'demo when 1'
@@ -34,7 +34,7 @@ class HelloSpockTest extends Specification {
         true
     }
 
-    def 'demo method 2'(){
+    def '4. demo method 2'(){
         given: 'demo given 2'
         true
         when: 'demo when 2'
@@ -45,7 +45,7 @@ class HelloSpockTest extends Specification {
         true
     }
 
-    def 'demo method error'(){
+    def '5. demo method error'(){
         given: 'demo given error'
         true
         when: 'demo when error'
@@ -57,7 +57,7 @@ class HelloSpockTest extends Specification {
     }
 
     @Ignore
-    def 'this test is ignored'(){
+    def '6. this test is ignored'(){
         given: '2 numbers'
         def i = 2
         def j = 3

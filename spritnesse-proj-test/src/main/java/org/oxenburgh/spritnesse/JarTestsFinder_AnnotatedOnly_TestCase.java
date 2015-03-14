@@ -34,9 +34,8 @@ public class JarTestsFinder_AnnotatedOnly_TestCase {
     @Test
     public void findOnlyAnnotatedClasses() throws Exception {
         List<String> annotatedClasses = new JarTestsFinder().findAnnotatedClasses(TEST_JAR);
-        assertEquals(1, annotatedClasses.size());
+        assertEquals("there should be only one annotatted class", 1, annotatedClasses.size());
         Class<?> clazz = loadClass(createClassLoader(TEST_JAR), annotatedClasses.get(0));
-        assertNotNull(clazz.getAnnotation(SpritnesseInclude.class));
+        assertNotNull("should be annotated", clazz.getAnnotation(SpritnesseInclude.class));
     }
-
 }

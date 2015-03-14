@@ -7,8 +7,10 @@
 |import                  |
 |org.oxenburgh.spritnesse|
 
-!|Table:SpockTable|./test-spock/target/test-spock.jar|
-|org.oxenburgh.[A-Za-z]+.*                              |
+!1 Spritnesse Documentation in junit output
+
+Please notice the gracefully named class name in the left hand column, the gracefully named method name in the second column, and run status in the last column
+
 
 !|Table:JunitTable|./spritnesse-proj-test/target/spritnesse-proj-test.jar|
 |.*oxenburgh.spritnesse.[A-Z]+.*                                         |

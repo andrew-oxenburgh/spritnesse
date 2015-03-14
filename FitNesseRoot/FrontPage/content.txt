@@ -10,4 +10,4 @@ What if we could join these up?
 
 Well now you can, with '''Spritnesse'''
 
-!contents 
+!contents -g

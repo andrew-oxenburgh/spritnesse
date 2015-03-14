@@ -20,6 +20,12 @@ as an example.
 !2 Logging
 You'll find the log file in the root dir, called spritnesse.log. If you want to override this, place a logback.* file in the classpath ahead of the spritnesse-proj jar.
 
+
+!2 Will run spock tests
+
+!|Table:SpockTable|./test-spock/target/test-spock.jar|
+|org.oxenburgh                                       |
+
 !2 No arguments. run only annotated tests
 !|Table:AnnotatedTable|./test-junit/target/test-junit.jar|
 
@@ -32,13 +38,8 @@ You'll find the log file in the root dir, called spritnesse.log. If you want to 
 
 !2 Argument - filters on package, regexp and wildcard
 !|Table:JunitTable|./test-junit/target/test-junit.jar|
-|org.oxen.*                                               |
+|org.oxen.*                                          |
 
 !2 Argument - should find at least one test
 !|Table:JunitTable|./test-junit/target/test-junit.jar|
-|org.doesntexist.*                                        |
-
-!2 Will run spock tests
-
-!|Table:SpockTable|./test-spock/target/test-spock.jar|
-|org.oxenburgh                                            |
+|org.doesntexist.*                                   |

@@ -1,5 +1,7 @@
 package org.oxenburgh.spritnesse;
 
+import static java.util.Arrays.asList;
+
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
@@ -33,7 +35,7 @@ public class JunitListener extends RunListener {
     private List<String> testNames = new ArrayList<String>();
     private List<List<String>> testResults = new ArrayList<List<String>>();
 
-    private String currentKey;
+    private List<String> currentKey;
 
     boolean failed;
 
@@ -41,7 +43,7 @@ public class JunitListener extends RunListener {
     @Override
     public void testStarted(Description description) throws Exception {
         currentKey = createKey(description);
-        testNames.add(currentKey);
+        testNames.add(currentKey + "");
         failed = false;
     }
 
@@ -60,7 +62,7 @@ public class JunitListener extends RunListener {
         failed = true;
         ArrayList<String> res = new ArrayList<>();
         res.add("fail");
-        res.add(currentKey);
+        res.addAll(currentKey);
         res.add(failure.getException()+"");
         res.add(failure.getMessage() + "," + failure.getTrace());
         testResults.add(res);
@@ -70,18 +72,18 @@ public class JunitListener extends RunListener {
     @Override
     public void testIgnored(Description description) throws Exception {
         testNames.add("ignore:" + createKey(description));
-        ArrayList<String> res = new ArrayList<>();
+        List<String> res = new ArrayList<>();
         res.add("ignore");
-        res.add(createKey(description));
+        res.addAll(createKey(description));
         testResults.add(res);
     }
 
 
     private void prependCurrentTest(String prepend) {
         testNames.remove(currentKey);
-        ArrayList<String> res = new ArrayList<>();
+        List<String> res = new ArrayList<>();
         res.add(prepend);
-        res.add(currentKey);
+        res.addAll(currentKey);
         testResults.add(res);
     }
 
@@ -89,12 +91,13 @@ public class JunitListener extends RunListener {
     public List<String> getTestNames() {
         return testNames;
     }
+
     public List<List<String>> getTestResults() {
         return testResults;
     }
 
 
-    private String createKey(Description description) {
+    private List<String> createKey(Description description) {
         String methodName = description.getMethodName();
         if (methodName == null) {
             Iterator<Annotation> iter = description.getAnnotations().iterator();
@@ -113,6 +116,6 @@ public class JunitListener extends RunListener {
                 methodName = "class ignored";
             }
         }
-        return description.getClassName() + ":" + methodName;
+        return asList(description.getClassName(), methodName);
     }
 }

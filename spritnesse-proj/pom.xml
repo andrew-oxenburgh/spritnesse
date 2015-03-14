@@ -22,7 +22,7 @@ License along with this library.
     <groupId>org.oxenburgh.spritnesse</groupId>
     <artifactId>spritnesse-proj</artifactId>
     <name>spritnesse-proj</name>
-    <version>1.14</version>
+    <version>1.15</version>
 
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
@@ -41,7 +41,7 @@ License along with this library.
         <dependency>
             <groupId>org.oxenburgh.spritnesse</groupId>
             <artifactId>test-spock</artifactId>
-            <version>1.14</version>
+            <version>1.15</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -69,11 +69,6 @@ License along with this library.
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>

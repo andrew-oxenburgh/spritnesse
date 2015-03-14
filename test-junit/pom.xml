@@ -23,13 +23,13 @@ License along with this library.
 
     -->
     <artifactId>test-junit</artifactId>
-    <version>1.14</version>
+    <version>1.15</version>
     <name>test-junit</name>
 
     <parent>
         <groupId>org.oxenburgh.spritnesse</groupId>
         <artifactId>spritnesse</artifactId>
-        <version>1.14</version>
+        <version>1.15</version>
     </parent>
 
 

@@ -36,3 +36,9 @@ Release Notes
 1.8
  - Runs with JUnit
  - Licence (Lesser GPL)
+
+
+Reminders
+=========
+
+mvn versions:set -DnewVersion=

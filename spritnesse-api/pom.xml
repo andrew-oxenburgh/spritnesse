@@ -22,14 +22,14 @@ License along with this library.
     <name>spritnesse-api</name>
     <groupId>org.oxenburgh.spritnesse</groupId>
     <artifactId>spritnesse-api</artifactId>
-    <version>1.14</version>
+    <version>1.15</version>
 
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <!--<properties>-->
-        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-    <!--</properties>-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <build>
         <finalName>${project.artifactId}</finalName>

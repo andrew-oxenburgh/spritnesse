@@ -1,13 +1,16 @@
 package org.oxenburgh.spritnesse;
 
+import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.oxenburgh.spritnesse.Helper.assertFoundLine;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.oxenburgh.HelloSpockTest;
+import org.oxenburgh.spritnesse.enclosed.ExceptionThrownClass;
 import org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue;
 import org.oxenburgh.spritnesse.enclosed.IgnoredClass_withoutValue;
 import org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail;
@@ -45,24 +48,11 @@ public class JunitListener_TestCase {
 
 
     @Test
-    public void oneMethod_spock() throws Exception {
-        List<List<String>> names = runWithClass(HelloSpockTest.class);
-        assertEquals(6, names.size());
-//        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:length of Spock's and his friends' names");
-//        assertFoundLine(names, "fail:org.oxenburgh.HelloSpockTest:demo method error:.*");
-//        assertFoundLine(names, "ignore:org.oxenburgh.HelloSpockTest:addition");
-        assertFoundLine(names, "pass.+org.oxenburgh.HelloSpockTest.+demo method 3");
-        assertFoundLine(names, "pass.+org.oxenburgh.HelloSpockTest.+demo method 2");
-        assertFoundLine(names, "pass.+org.oxenburgh.HelloSpockTest.+demo method 1");
-    }
-
-
-    @Test
     public void oneMethod_getName() throws Exception {
         List<List<String>> names = runWithClass(TestWithOnePassingMethod.class);
 
         assertEquals(1, names.size());
-        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestWithOnePassingMethod.+testPass", names.get(0));
+        assertListContainsString("pass.+org.oxenburgh.spritnesse.enclosed.TestWithOnePassingMethod.+testPass", names.get(0));
     }
 
 
@@ -71,8 +61,8 @@ public class JunitListener_TestCase {
         List<List<String>> names = runWithClass(TestWithTwoPassingMethods.class);
 
         assertEquals(2, names.size());
-        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods.+testOnePass", names.get(0));
-        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods.+testTwoPass", names.get(1));
+        assertListContainsString("pass.+org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods.+testOnePass", names.get(0));
+        assertListContainsString("pass.+org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods.+testTwoPass", names.get(1));
     }
 
 
@@ -96,7 +86,7 @@ public class JunitListener_TestCase {
         String prefix =
                 "fail:org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail_withSemiColon:testFail:java.lang.AssertionError: there are 2 semi-colons here:here's the first:and here's the second:th";
 //                assertStringEqualsList("should include stack trace", prefix.trim(), names.get(0).substring(0, prefix.length()).trim());
-        assertStringEqualsList("pass.+org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail_withSemiColon.+testPass", names.get(1));
+        assertListContainsString("pass.+org.oxenburgh.spritnesse.enclosed.TestTwoMethodsOneFail_withSemiColon.+testPass", names.get(1));
     }
 
 
@@ -104,7 +94,7 @@ public class JunitListener_TestCase {
     public void ignoredMethodsIgnored() throws Exception {
         List<List<String>> names = runWithClass(TestWithIgnoredMethod.class);
         assertEquals(1, names.size());
-        assertStringEqualsList("ignore.+org.oxenburgh.spritnesse.enclosed.TestWithIgnoredMethod.+testIgnored", names.get(0));
+        assertListContainsString("ignore, org.oxenburgh.spritnesse.enclosed.TestWithIgnoredMethod, testIgnored", names.get(0));
     }
 
 
@@ -112,7 +102,7 @@ public class JunitListener_TestCase {
     public void ignoredClassIgnored() throws Exception {
         List<List<String>> names = runWithClass(IgnoredClass_withoutValue.class);
         assertEquals(1, names.size());
-        assertStringEqualsList("ignore.+org.oxenburgh.spritnesse.enclosed.IgnoredClass_withoutValue.+class ignored", names.get(0));
+        assertListContainsString("ignore.+org.oxenburgh.spritnesse.enclosed.IgnoredClass_withoutValue.+class ignored", names.get(0));
     }
 
 
@@ -120,12 +110,16 @@ public class JunitListener_TestCase {
     public void ignoredClassIgnored_showValue() throws Exception {
         List<List<String>> names = runWithClass(IgnoredClass_withValue.class);
         assertEquals(1, names.size());
-        assertStringEqualsList("ignore.+org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue.+some value", names.get(0));
+        assertListContainsString("ignore.+org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue.+some value", names.get(0));
     }
 
 
-    private void assertStringEqualsList(String expected, List<String> actual) {
-        assertTrue(String.format("didn't find [%s] in [%s]", expected, actual), (actual + "").matches("^.+" + expected + ".+$"));
+    private void assertListContainsString(String expected, List<String> actual) {
+        String errorMessage = format("didn't find [%s] in [%s]", expected, actual);
+        String actualAsString = actual + "";
+        String regex = "^.+" + expected + ".+$";
+
+        assertTrue(errorMessage, actualAsString.matches(regex));
     }
 
 
