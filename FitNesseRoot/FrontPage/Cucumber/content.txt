@@ -1,0 +1,14 @@
+!define TEST_SYSTEM {slim}
+!path ./spritnesse-proj/target/spritnesse-proj.jar
+!path ./test-junit/target/test-junit-jar-with-dependencies.jar
+!path ./test-spock/target/test-spock-jar-with-dependencies.jar
+!path ./test-cucumber/target/test-cucumber-jar-with-dependencies.jar
+
+|import                  |
+|org.oxenburgh.spritnesse|
+
+!2 Run cucumber tests
+
+!|Table:CucumberTable|./test-cucumber/target/test-cucumber.jar|
+|org.oxenburgh                                                |
+
