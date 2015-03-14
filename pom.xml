@@ -19,6 +19,7 @@
         <module>spritnesse-api</module>
         <module>test-junit</module>
         <module>test-spock</module>
+        <module>test-cucumber</module>
         <!--<module>test-cucumber</module>-->
         <module>spritnesse-proj</module>
         <module>spritnesse-proj-test</module>
@@ -71,7 +72,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.2</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

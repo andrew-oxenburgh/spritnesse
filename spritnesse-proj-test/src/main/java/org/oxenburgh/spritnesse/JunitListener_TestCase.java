@@ -8,6 +8,7 @@ import static org.oxenburgh.spritnesse.Helper.assertFoundLine;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.Description;
 import org.junit.runner.JUnitCore;
 import org.oxenburgh.HelloSpockTest;
 import org.oxenburgh.spritnesse.enclosed.ExceptionThrownClass;
@@ -19,6 +20,7 @@ import org.oxenburgh.spritnesse.enclosed.TestWithIgnoredMethod;
 import org.oxenburgh.spritnesse.enclosed.TestWithOnePassingMethod;
 import org.oxenburgh.spritnesse.enclosed.TestWithTwoPassingMethods;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 /**
@@ -111,6 +113,30 @@ public class JunitListener_TestCase {
         List<List<String>> names = runWithClass(IgnoredClass_withValue.class);
         assertEquals(1, names.size());
         assertListContainsString("ignore.+org.oxenburgh.spritnesse.enclosed.IgnoredClass_withValue.+some value", names.get(0));
+    }
+
+
+    @Test
+    public void cucumberWillCallAFinalFinish_whichWillCauseADuplicatedLastLine_OrdinaryTestsLinesAreLast() throws Exception {
+        JunitListener listener = new JunitListener();
+
+        String expectedDesc = "good start and end";
+        Description desc = Description.createTestDescription(String.class, expectedDesc);
+        listener.testStarted(desc);
+        listener.testFinished(desc);
+        String actualDesc = listener.getTestResults().get(0).get(2);
+        assertEquals(expectedDesc, actualDesc);
+    }
+
+
+    @Test
+    public void cucumberWillCallAFinalFinish_whichWillCauseADuplicatedLastLine_DifferingLinesAreIgnored() throws Exception {
+        JunitListener listener = new JunitListener();
+
+        listener.testStarted(Description.createTestDescription(String.class, "starting line"));
+        listener.testFinished(Description.createTestDescription(String.class, "ending line"));
+        assertEquals("should ignore where current test and finished tests description differ", 0, listener.getTestResults().size());
+//        assertEquals(expectedDesc, actualDesc);
     }
 
 

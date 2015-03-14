@@ -3,8 +3,11 @@ package org.oxenburgh.spritnesse;
 import static java.util.Arrays.asList;
 
 import org.junit.runner.Description;
+import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -32,6 +35,9 @@ import java.util.List;
  */
 public class JunitListener extends RunListener {
 
+    static Logger log = LoggerFactory.getLogger(JunitListener.class);
+
+
     private List<String> testNames = new ArrayList<String>();
     private List<List<String>> testResults = new ArrayList<List<String>>();
 
@@ -42,6 +48,7 @@ public class JunitListener extends RunListener {
 
     @Override
     public void testStarted(Description description) throws Exception {
+        log.debug("test started - {}", description);
         currentKey = createKey(description);
         testNames.add(currentKey + "");
         failed = false;
@@ -50,6 +57,11 @@ public class JunitListener extends RunListener {
 
     @Override
     public void testFinished(Description ignore) throws Exception {
+        if(!currentKey.equals(createKey(ignore))){
+            log.debug("this is not what we signed up for");
+            return;
+        }
+        log.debug("test finished - failed {} = {}", ignore, failed);
         if (!failed) {
             prependCurrentTest("pass");
         }
@@ -58,24 +70,44 @@ public class JunitListener extends RunListener {
 
     @Override
     public void testFailure(Failure failure) throws Exception {
+        log.debug("test failure - {}", failure);
         testNames.remove(currentKey);
         failed = true;
         ArrayList<String> res = new ArrayList<>();
         res.add("fail");
         res.addAll(currentKey);
-        res.add(failure.getException()+"");
-        res.add(failure.getMessage() + "," + failure.getTrace());
+//        res.add(failure.getException()+"");
+        res.add(failure.getTrace());
         testResults.add(res);
     }
 
 
     @Override
     public void testIgnored(Description description) throws Exception {
+        log.debug("test ignored - {}", description);
         testNames.add("ignore:" + createKey(description));
         List<String> res = new ArrayList<>();
         res.add("ignore");
         res.addAll(createKey(description));
         testResults.add(res);
+    }
+
+
+    @Override
+    public void testRunStarted(Description description) throws Exception {
+        log.debug("test run started - {}", description);
+    }
+
+
+    @Override
+    public void testRunFinished(Result result) throws Exception {
+        log.debug("test run finished - {}", result);
+    }
+
+
+    @Override
+    public void testAssumptionFailure(Failure failure) {
+        log.debug("test assumption failed - {}", failure);
     }
 
 
