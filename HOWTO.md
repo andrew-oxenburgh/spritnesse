@@ -11,15 +11,15 @@ move to that dir
 cd spritnesse
 
 -- build the project.
-mvn package
+./buildAndTest.sh
 
 
 -- run fitnesse
 ./run.sh
 
 
--- go to the demo page
-open http://localhost:9001
+-- to stop fitnesse
+./kill.sh
 
 
 
