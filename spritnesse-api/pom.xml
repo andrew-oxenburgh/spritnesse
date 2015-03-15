@@ -22,7 +22,7 @@ License along with this library.
     <name>spritnesse-api</name>
     <groupId>org.oxenburgh.spritnesse</groupId>
     <artifactId>spritnesse-api</artifactId>
-    <version>1.15</version>
+    <version>1.16</version>
 
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>

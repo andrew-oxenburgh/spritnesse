@@ -4,12 +4,12 @@
 
     <artifactId>test-cucumber</artifactId>
     <name>test-cucumber</name>
-    <version>1.15</version>
+    <version>1.16</version>
 
     <parent>
         <groupId>org.oxenburgh.spritnesse</groupId>
         <artifactId>spritnesse</artifactId>
-        <version>1.15</version>
+        <version>1.16</version>
     </parent>
 
     <properties>

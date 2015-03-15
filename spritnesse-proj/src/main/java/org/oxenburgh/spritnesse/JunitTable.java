@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class JunitTable extends SpritnesseTable {
 
-    static Logger logger = LoggerFactory.getLogger(JunitTable.class);
+    static Logger log = LoggerFactory.getLogger(JunitTable.class);
 
     public JunitTable(String jarName) {
         super(jarName);
@@ -33,7 +33,7 @@ public class JunitTable extends SpritnesseTable {
 
     @Override
     List getClassesToBeTested(List<List<String>> args) {
-        logger.info("entering JunitTable");
+        log.info("entering JunitTable");
         List classNames;
         if (args == null || args.isEmpty()) {
             classNames = new JarTestsFinder().findClassesIn(jarName);

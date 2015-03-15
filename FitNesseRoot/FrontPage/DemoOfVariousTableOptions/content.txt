@@ -30,6 +30,10 @@ There are alternatives to this, but this worked for me.
 For spock and other environments, you'll need to make that environment available to fitnesse. I found a good way was to package the env up in the jar. You can look in the pom.xml for test-spock
 as an example.
 
+!2 Spock tests
+!|Table:SpockTable|./test-spock/target/test-spock.jar|
+|org.oxenburgh                                       |
+
 !2 Annotated tests
 !|Table:AnnotatedTable|./test-junit/target/test-junit.jar|
 
@@ -54,8 +58,4 @@ as an example.
 !2 Cucumber tests
 !|Table:CucumberTable|./test-cucumber/target/test-cucumber.jar|
 |org.oxenburgh                                                |
-
-!2 Spock tests
-!|Table:SpockTable|./test-spock/target/test-spock.jar|
-|org.oxenburgh                                       |
 

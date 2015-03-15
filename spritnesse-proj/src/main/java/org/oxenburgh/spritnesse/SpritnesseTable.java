@@ -66,7 +66,7 @@ public abstract class SpritnesseTable {
         List<String> classNames = getClassesToBeTested(args);
 
         List<Class> classes = listOfClasses(classNames);
-        List<List<String>> tests = runTests(classes);
+        List<SpritnesseTestResult> tests = runTests(classes);
         List table = makeTable(tests);
 
         for (List<String> row : args) {
@@ -98,7 +98,7 @@ public abstract class SpritnesseTable {
     }
 
 
-    List<List<String>> runTests(List<Class> clazzes) {
+    List<SpritnesseTestResult> runTests(List<Class> clazzes) {
         JUnitCore core = new JUnitCore();
         JunitListener listener = new JunitListener();
         core.addListener(listener);
@@ -118,22 +118,22 @@ public abstract class SpritnesseTable {
     }
 
 
-    public List makeTable(List<List<String>> strings) {
+    public List makeTable(List<SpritnesseTestResult> strings) {
         List<List<String>> arrayLists = new ArrayList();
 
         String currentClass = "";
 
-        for (List<String> parts : strings) {
-            String status = parts.get(0);
-            String clazzName = parts.get(1);
+        for (SpritnesseTestResult parts : strings) {
+            String status = parts.getStatus();
+            String clazzName = parts.getClassName();
             if (currentClass.equals(clazzName)) {
                 clazzName = "";
             }
             else {
                 currentClass = clazzName;
             }
-            String methodName = parts.size() > 2 ? parts.get(2) : "";
-            String error = parts.size() > 3 ? parts.get(3) : null;
+            String methodName = parts.getMethodName();
+            String error = parts.getError();
 
             String clazz = "report:" + camelCaser.classMassage(clazzName);
             String method = "report:" + camelCaser.sentenize(methodName);
@@ -144,7 +144,7 @@ public abstract class SpritnesseTable {
                 list = asList(clazz, method, status);
             }
             else {
-                String message = parts.size() >= 5 ? parts.get(4) : "";
+                String message = parts.getTrace();
                 String text = "fail:" + error + "->" + message;
                 list = asList(clazz, method, text);
             }

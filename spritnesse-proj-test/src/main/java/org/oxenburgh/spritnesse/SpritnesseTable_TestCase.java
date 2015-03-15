@@ -2,7 +2,7 @@ package org.oxenburgh.spritnesse;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
-import static org.oxenburgh.spritnesse.Helper.assertFoundLine;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,11 +41,12 @@ public class SpritnesseTable_TestCase {
 
     @Test
     public void givenSinglePassingTest_createTable() throws Exception {
-        List list = asList(asList("pass", "class", "method"));
+        List<SpritnesseTestResult> results = new ArrayList<>();
+        results.add(new SpritnesseTestResult("pass", "class", "method"));
 
         List expected = asList(asList("report:class", "report:method", "pass"));
 
-        assertEquals(expected, table.makeTable(list));
+        assertEquals(expected, table.makeTable(results));
     }
 
 
@@ -58,62 +59,71 @@ public class SpritnesseTable_TestCase {
 
     @Test
     public void givenSingleIgnoredTest_markedIgnore() throws Exception {
-        List list = asList(asList("ignored", "class", "method"));
+        List<SpritnesseTestResult> results = new ArrayList<>();
+        results.add(new SpritnesseTestResult("ignored", "class", "method"));
 
         List expected = asList(asList("report:class", "report:method", "ignored"));
 
-        assertEquals(expected, table.makeTable(list));
+        assertEquals(expected, table.makeTable(results));
     }
 
 
     @Test
     public void givenTwoPassingTest_secondOneDoesntHaveClassName_createTable() throws Exception {
-        List list = asList(asList("pass", "class", "method"), asList("pass", "class", "method2"));
+        List<SpritnesseTestResult> results = new ArrayList<>();
+        results.add(new SpritnesseTestResult("pass", "class", "method"));
+        results.add(new SpritnesseTestResult("pass", "class", "method2"));
 
         List expected = asList(asList("report:class", "report:method", "pass"), asList("report:", "report:method 2", "pass"));
 
-        assertEquals(expected, table.makeTable(list));
+        assertEquals(expected, table.makeTable(results));
     }
 
 
     @Test
     public void givenTwoFailingTests_secondOneDoesntHaveClassName_createTable() throws Exception {
-        List<List<String>> list = asList(asList("fail", "class", "method"), asList("fail", "class", "method2"));
+        List<SpritnesseTestResult> results = new ArrayList<>();
+        results.add(new SpritnesseTestResult("fail", "class", "method"));
+        results.add(new SpritnesseTestResult("fail", "class", "method2"));
 
         List expected = asList(asList("report:class", "report:method", "fail"), asList("report:", "report:method 2", "fail"));
 
-        assertEquals(expected, table.makeTable(list));
+        assertEquals(expected, table.makeTable(results));
     }
 
 
     @Test
     public void givenTwoFailingTests_oneWithError_secondOneDoesntHaveClassName_createTable() throws Exception {
-        List list = asList(asList("fail", "class", "method", "exception", "message", "trace"), asList("fail", "class", "method2", "exception2", "message2", "trace2"));
+        List<SpritnesseTestResult> results = new ArrayList<>();
+        results.add(new SpritnesseTestResult("fail", "class", "method", "exception", "message"));
+        results.add(new SpritnesseTestResult("fail", "class", "method 2", "exception2", "message2"));
 
-        List expected = asList(asList("report:class", "report:method", "fail:exception->message"), asList("report:", "report:method 2", "fail:exception2->message2")); 
-        assertEquals(expected, table.makeTable(list));
+        List expected = asList(asList("report:class", "report:method", "fail:exception->message"), asList("report:", "report:method 2", "fail:exception2->message2"));
+        assertEquals(expected, table.makeTable(results));
     }
 
 
     @Test
     public void shouldntHaveUnescapedSingleQuotesInTrace() throws Exception {
-        List list = asList(asList("fail", "class", "method", "exception", "message", "here's an error"));
+        List<SpritnesseTestResult> results = new ArrayList<>();
+        results.add(new SpritnesseTestResult("fail", "class", "method", "exception", "message"));
 
         List expected = asList(asList("report:class", "report:method", "fail:exception->message"));
 
-        assertEquals(expected, table.makeTable(list));
+        assertEquals(expected, table.makeTable(results));
     }
 
 
     @Test
     public void givenFailingTests_withColon_showsFullError() throws Exception {
-        List list = asList(asList("fail", "class", "method", "exception", "message", "trace"),
-                asList("fail", "class", "method2", "exception2", "message2", "trace2"));
+        List<SpritnesseTestResult> results = new ArrayList<>();
+        results.add(new SpritnesseTestResult("fail", "class", "method", "exception", "message"));
+        results.add(new SpritnesseTestResult("fail", "class", "method2", "exception2", "message2"));
 
         List expected = asList(asList("report:class", "report:method", "fail:exception->message"),
                 asList("report:", "report:method 2", "fail:exception2->message2"));
 
-        assertEquals(expected, table.makeTable(list));
+        assertEquals(expected, table.makeTable(results));
     }
 
 
@@ -134,6 +144,6 @@ public class SpritnesseTable_TestCase {
 
         List<List<String>> results = spritnesseTable.doTable(EMPTY_LIST_OF_LISTS);
         assertEquals("should get 2 lines", 2, results.size());
-        assertFoundLine(results, "should find 1 test");
+        assertTrue((results + "").matches(".*should find 1 test.*"));
     }
 }

@@ -38,8 +38,9 @@ public class JunitListener extends RunListener {
     static Logger log = LoggerFactory.getLogger(JunitListener.class);
 
 
-    private List<String> testNames = new ArrayList<String>();
-    private List<List<String>> testResults = new ArrayList<List<String>>();
+    private List<String> testNames = new ArrayList<>();
+
+    List<SpritnesseTestResult> testResults = new ArrayList<>();
 
     private List<String> currentKey;
 
@@ -61,7 +62,7 @@ public class JunitListener extends RunListener {
             log.debug("this is not what we signed up for");
             return;
         }
-        log.debug("test finished - failed {} = {}", ignore, failed);
+        log.debug("test finished - {} = {}", ignore, failed);
         if (!failed) {
             prependCurrentTest("pass");
         }
@@ -70,26 +71,33 @@ public class JunitListener extends RunListener {
 
     @Override
     public void testFailure(Failure failure) throws Exception {
+        SpritnesseTestResult testResult = new SpritnesseTestResult();
+
         log.debug("test failure - {}", failure);
         testNames.remove(currentKey);
         failed = true;
-        ArrayList<String> res = new ArrayList<>();
-        res.add("fail");
-        res.addAll(currentKey);
-//        res.add(failure.getException()+"");
-        res.add(failure.getTrace());
-        testResults.add(res);
+        testResult.setStatus("fail");
+        testResult.setClassName(currentKey.get(0));
+        testResult.setMethodName(currentKey.get(1));
+        testResult.setError(failure.getMessage());
+        testResult.setTrace(failure.getTrace());
+
+        testResults.add(testResult);
     }
 
 
     @Override
     public void testIgnored(Description description) throws Exception {
+        SpritnesseTestResult testResult = new SpritnesseTestResult();
+        
         log.debug("test ignored - {}", description);
-        testNames.add("ignore:" + createKey(description));
-        List<String> res = new ArrayList<>();
-        res.add("ignore");
-        res.addAll(createKey(description));
-        testResults.add(res);
+        List<String> key = createKey(description);
+        testNames.add("ignore:" + key);
+        testResult.setStatus("ignore");
+        testResult.setClassName(key.get(0));
+        testResult.setMethodName(key.get(1));
+
+        testResults.add(testResult);
     }
 
 
@@ -112,11 +120,14 @@ public class JunitListener extends RunListener {
 
 
     private void prependCurrentTest(String prepend) {
+        SpritnesseTestResult testResult = new SpritnesseTestResult();
+
         testNames.remove(currentKey);
-        List<String> res = new ArrayList<>();
-        res.add(prepend);
-        res.addAll(currentKey);
-        testResults.add(res);
+        testResult.setStatus(prepend);
+        testResult.setClassName(currentKey.get(0));
+        testResult.setMethodName(currentKey.get(1));
+
+        testResults.add(testResult);
     }
 
 
@@ -124,7 +135,7 @@ public class JunitListener extends RunListener {
         return testNames;
     }
 
-    public List<List<String>> getTestResults() {
+    public List<SpritnesseTestResult> getTestResults() {
         return testResults;
     }
 
