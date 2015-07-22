@@ -48,95 +48,102 @@ public class CamelCaser_TestCase {
 
     @Test
     public void removeCamelCasing_everythingLowerCase_spacesInsteadOfCapitals() throws Exception {
-        assertSentenizes("me here", "testMeHere");
+        assertSentenizes("testMeHere", "me here");
     }
 
 
     @Test
     public void removeCamelCasing_keepsPrefisNumbers() throws Exception {
-        assertSentenizes("1. test  me  here", "1. test Me Here");
-        assertSentenizes("1.test  me  here", "1.test Me Here");
+        assertSentenizes("1. test Me Here", "1. test  me  here");
+        assertSentenizes("1.test Me Here", "1.test  me  here");
     }
 
 
     @Test
     public void handlesUnderScores_andNumbers() throws Exception {
-        assertSentenizes("a 1, advert", "a1_advert");
+        assertSentenizes("a1_advert", "a 1, advert");
     }
 
 
     @Test
     public void handlesMultiDigitNumbers() throws Exception {
-        assertSentenizes("a 12 a", "a12A");
+        assertSentenizes("a12A", "a 12 a");
     }
 
 
     @Test
     public void handlesSingleDigitNumbers() throws Exception {
-        assertSentenizes("a 1 a", "a1A");
+        assertSentenizes("a1A", "a 1 a");
+    }
+
+
+    @Test
+    public void handlesLeadingNumbers() throws Exception {
+        assertSentenizes("1. A", "1.  a");
+        assertSentenizes("1. a", "1. a");
     }
 
 
     @Test
     public void numbers_littleLettersFollowingNumberAreAppendedToNumber() throws Exception {
-        assertSentenizes("a 1a", "a1a");
+        assertSentenizes("a1a", "a 1a");
     }
 
 
     @Test
     public void numbers_bigLettersFollowingNumberAreSeparatedFromNumber() throws Exception {
-        assertSentenizes("a 1 a", "a1A");
+        assertSentenizes("a1A", "a 1 a");
     }
 
 
     @Test
     public void ignorePrefixTest() throws Exception {
-        assertSentenizes("a b", "TestAB");
+        assertSentenizes("TestAB", "a b");
     }
 
 
     @Test
     public void ignorePrefixTest_lowerCase() throws Exception {
-        assertSentenizes("a b", "testAB");
+        assertSentenizes("testAB", "a b");
     }
 
 
     @Test
     public void includeMidfixTest() throws Exception {
-        assertSentenizes("a test a", "aTestA");
+        assertSentenizes("aTestA", "a test a");
     }
 
 
     @Test
     public void removePostfixTestCase() throws Exception {
-        assertSentenizes("a", "aTestCase");
+        assertSentenizes("aTestCase", "a");
     }
 
 
     @Test
     public void removePostfixTest() throws Exception {
-        assertSentenizes("a", "aTest");
+        assertSentenizes("aTest", "a");
     }
 
 
     @Test
     public void includeMidfixTestCase() throws Exception {
-        assertSentenizes("a test case a", "aTestCaseA");
+        assertSentenizes("aTestCaseA", "a test case a");
     }
 
 
     @Test
     public void ignorePostfixAppVerify() throws Exception {
-        assertSentenizes("a", "aAppVerify");
+        assertSentenizes("aAppVerify", "a");
     }
 
 
     @Test
     public void includeMidfixAppVerify() throws Exception {
-        assertSentenizes("a app verify a", "aAppVerifyA");
+        assertSentenizes("aAppVerifyA", "a app verify a");
     }
 
-    private void assertSentenizes(String expected, String input) {
+    private void assertSentenizes(String input, String expected) {
         assertEquals(expected, camelCaser.sentenize(input));
     }
 
